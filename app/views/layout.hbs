@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang='en-us'>
+<head>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <link rel="stylesheet" href="/static/style/bootstrap-formhelpers.min.css">
+    <link rel="stylesheet" href="/static/style/bootstrap.css">
+    <link rel="stylesheet" href="/static/style/animate.css">
+    <link rel="stylesheet" href="/static/style/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/style/font.css">
+    <link rel="stylesheet" href="/static/style/plugin.css">
+    <link rel="stylesheet" href="/static/style/app.css">
+    <link rel="stylesheet" href="/static/style/css.css">
+    <!--[if lt IE 9]>
+    <script src="/static/js/ie/respond.min.js" cache="false"></script>
+    <script src="/static/js/ie/html5.js" cache="false"></script>
+    <script src="/static/js/ie/fix.js" cache="false"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="/static/img/glyphicons-halflings-white.png">
+    <link rel="stylesheet" href="/static/img/glyphicons-halflings.png">
+    <title>Deadline</title>
+</head>
+<body>
+<section class="hbox stretch">
+    {{#block "menu"}}
+        <aside class="bg-primary aside-sm" id="nav">
+            <section class="vbox">
+                <header class="dker nav-bar nav-bar-fixed-top">
+                    <p>Deadline
+
+                    <p>
+                        <spam>application
+                            <spam>
+                </header>
+                <section class="w-f">
+                    <nav class="nav-primary hidden-xs">
+                        <ul class="nav">
+                            {{#if user}}
+                                <li class="{{#ifeq active "main" }}active{{/ifeq}}">
+                                    <a href="/">
+                                        <i class="fa fa-home"></i>
+                                        <span>Home</span>
+                                    </a>
+                                </li>
+                                <li class="{{#ifeq active "add" }}active{{/ifeq}}">
+                                    <a href="/add_new_deadline">
+                                        <i class="fa fa-plus"></i>
+                                        <span>Add new deadline</span>
+                                    </a>
+                                </li>
+                                <li class="{{#ifeq active "my_deadlines" }}active{{/ifeq}}">
+                                    <a href="/my_deadlines">
+                                        <i class="fa fa-list"></i>
+                                        <span>Show my deadlines</span>
+                                    </a>
+                                </li>
+                                <li class="{{#ifeq active "about" }}active{{/ifeq}}">
+                                    <a href="/about">
+                                        <i class="fa fa-file-text"></i>
+                                        <span>About</span>
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a href="/logout">
+                                        <i class="fa fa-sign-out"></i>
+                                        <span>Log Out</span>
+                                    </a>
+                                </li>
+                            {{else}}
+                                <li class="{{#ifeq active "main" }}active{{/ifeq}}">
+                                    <a href="/">
+                                        <i class="fa fa-home"></i>
+                                        <span>Home</span>
+                                    </a>
+                                </li>
+                                <li class="{{#ifeq active "sign" }}active{{/ifeq}}">
+                                    <a href="/sign">
+                                        <i class="fa fa-sign-in"></i>
+                                        <span>Sign Up</span>
+                                    </a>
+                                </li>
+                                <li class="{{#ifeq active "login" }}active{{/ifeq}}">
+                                    <a href="/login">
+                                        <i class="fa fa-sign-in"></i>
+                                        <span>Log In</span>
+                                    </a>
+                                </li>
+                                <li class="{{#ifeq active "about" }}active{{/ifeq}}">
+                                    <a href="/about">
+                                        <i class="fa fa-file-text"></i>
+                                        <span>About</span>
+                                    </a>
+                                </li>
+
+                            {{/if}}
+                        </ul>
+                    </nav>
+                </section>
+                <footer class="footer bg-gradient hidden-xs">
+                    <span>Made by lusia</span>
+                </footer>
+            </section>
+        </aside>
+    {{/block}}
+    <section id="content">
+        <section class="vbox">
+            <header class="header bg-white b-b">
+                <p>Welcome</p>
+            </header>
+            {{#block "content"}}
+                <section class="scrollable wrapper">
+                    <div class="row">
+                        {{#block "head"}}
+                            {{text}}
+                        {{/block}}
+                    </div>
+                </section>
+            {{/block}}
+        </section>
+    </section>
+</section>
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/bootstrap.js"></script>
+<script src="/static/js/charts/sparkline/jquery.sparkline.min.js"></script>
+<script src="/static/js/app.js"></script>
+<script src="/static/js/app.plugin.js"></script>
+<script src="/static/js/app.data.js"></script>
+<script src="/static/js/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="/static/js/charts/easypiechart/jquery.easy-pie-chart.js"></script>
+<script src="/static/js/charts/morris/raphael-min.js"></script>
+<script src="/static/js/charts/morris/morris.min.js"></script>
+<script src="/static/js/jquery.ui.datepicker.min.js"></script>
+<script src="/static/js/bootstrap-formhelpers.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.4.0/moment.min.js"></script>
+<script src="/static/js/js.js"></script>
+
+
+</body>
+</html>

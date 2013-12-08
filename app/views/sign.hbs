@@ -1,0 +1,54 @@
+{{#extend "layout"}}
+    {{#replace "content"}}
+        <div class="row">
+            <div class="col-sm-6">
+                <section class="panel">
+                    <header class="panel-heading bg bg-success text-center"> Sign up</header>
+                    <div class="panel-body">
+                        <form action="/sign" method="post" class="bs-example form-horizontal">
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label" for="name">Name</label>
+
+                                <div class="col-lg-10">
+                                    <input type="text" id="name" class="form-control" name="name" placeholder="Name"
+                                           value="{{#if name}}{{name}}{{/if}}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label" for="email">Email</label>
+
+                                <div class="col-lg-10">
+                                    <input type="email" id="email" class="form-control" name="email" placeholder="Email"
+                                           value="{{#if email}}{{email}}{{/if}}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label" for="password">Enter Password</label>
+
+                                <div class="col-lg-10">
+                                    <input type="password" class="form-control" id="password" name="password"
+                                           placeholder="Password">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label" for="confirm_password">Confirm Password</label>
+
+                                <div class="col-lg-10">
+                                    <input type="password" class="form-control" id="confirm_password"
+                                           name="confirm_password"
+                                           placeholder="Password">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-offset-2 col-lg-10">
+                                    <button type="submit" class="btn btn-sm btn-default">Sign in</button>
+                                </div>
+                            </div>
+                            {{#displayFlashErrorsIfExist req}}{{/displayFlashErrorsIfExist}}
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </div>
+    {{/replace}}
+{{/extend}}

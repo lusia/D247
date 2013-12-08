@@ -1,0 +1,33 @@
+{{#extend "layout"}}
+
+    {{#replace "content"}}
+
+        {{#each deadlines}}
+            <div class="row">
+                <div class="span2">
+                    {{#gravatar user_email}}{{/gravatar}}
+                </div>
+                <div class="span4">
+                    <ul>
+                        <li>Name : {{name}}</li>
+                        <li>Date : {{date}}</li>
+                        <li>Description : {{description}}</li>
+                    </ul>
+
+                    <hr>
+                </div>
+                <div class="span3">
+                    <p>Voting:</p>
+                    <a class="js-vote_up" class="btn btn-small" href="/"><i class="icon-arrow-up"></i>UP</a>
+
+                    <p>You got 1 vote</p>
+                    <a class="js-vote_down" class="btn btn-small" href="#"><i class="icon-arrow-down"></i>DOWN</a>
+
+                </div>
+
+            </div>
+        {{/each}}
+
+
+    {{/replace}}
+{{/extend}}

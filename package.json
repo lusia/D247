@@ -1,0 +1,29 @@
+{
+  "name": "deadlineApp",
+  "version": "0.5.0",
+  "description": "",
+  "main": "web.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "express": "~3.4.1",
+    "passport": "~0.1.17",
+    "hbs": "~2.4.0",
+    "mongodb": "~1.3.19",
+    "handlebars": "~1.0.12",
+    "handlebars-layouts": "~0.1.3",
+    "passport-local": "~0.1.6",
+    "connect-flash": "~0.1.1",
+    "underscore": "~1.5.2",
+    "string": "~1.6.0",
+    "express-validator": "~0.8.0",
+    "nodejs-gravatar": "~1.0.2",
+    "gravatar": "~1.0.6",
+    "connect-redis": "~1.4.6",
+    "moment": "~2.4.0",
+    "js-yaml": "~2.1.3"
+  }
+}

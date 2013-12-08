@@ -1,0 +1,15 @@
+session:
+  redis:
+    host:
+    port:
+    db:
+    pass:
+    secret:
+
+
+db:
+    host:
+    port:
+    user:
+    pass:
+    name:
