@@ -62,65 +62,44 @@ app.set('db', db);
 /**
  * Authenticate user
  */
-
 passport.use(new LocalStrategy(
     function (email, password, done) {
-        console.log('Trying to authenticate ' + email);
         db.collection("users").findOne({ email: email }, function (err, user) {
             var salt, hashedPassword;
             if (err) {
-                console.log(err);
                 return done(err);
             } else if (!user) {
-                console.log('User ' + email + ' does not exist');
                 return done(null, false);
             } else {
-                console.log('Examining ' + email + ' password');
                 salt = user.salt;
                 password = password + salt;
                 hashedPassword = crypto.createHash("md5").update(password).digest("hex")
-
                 if (hashedPassword === user.password) {
-                    console.log(email + ' is log in now');
                     return done(null, user);
                 } else {
-                    console.log(email + '\'s password is wrong');
                     return done(null, false);
                 }
             }
         });
-    }));
+    }
+));
 
 app.use(function (err, req, res, next) {
-    console.log(err);
     res.send(500, 'Something broke!');
 });
-
 
 passport.serializeUser(function (user, done) {
     done(null, user._id);
 });
 
 passport.deserializeUser(function (id, done) {
-    console.log('deserialize ' + id);
     db.collection("users").findOne({"_id": new ObjectId(id)}, function (err, user) {
-
         done(null, user);
-
     });
-
 });
 
 mainController = require('./app/controllers/main.js')(app);
 app.get("/", mainController.main);
-
-app.post("/index", function (req, res) {
-    var vote_up = req.body.up,
-        vote_down = req.body.down;
-
-
-});
-
 
 userController = require("./app/controllers/user.js")(app);
 app.get("/sign", userController.sign);
@@ -140,7 +119,6 @@ app.get("/about", aboutController.about);
 
 oneDeadlineController = require('./app/controllers/one_deadline.js')(app);
 app.get("/deadline/:id", oneDeadlineController["deadline_post"]);
-
 
 mongoclient.open(function (err, mongoclient) {
     app.listen(8080);
