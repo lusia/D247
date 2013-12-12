@@ -2,18 +2,30 @@
     display: none;
 }
 
+.description {
+    margin-top: 15px;
+}
+
+/*.inline_progress {*/
+    /*margin-bottom: 10px;*/
+/*}*/
+
+.progress_striped {
+ margin-top: 23px;
+}
+
 /*a {*/
-    /*text-decoration: none;*/
-    /*color: #000000;*/
-    /*font-size: 20px;*/
+/*text-decoration: none;*/
+/*color: #000000;*/
+/*font-size: 20px;*/
 /*}*/
 
 /*a:hover {*/
-    /*color: blue;*/
-    /*text-decoration: none;*/
+/*color: blue;*/
+/*text-decoration: none;*/
 /*}*/
 
 /*ul#list li {*/
-    /*font-size: 15px;*/
+/*font-size: 15px;*/
 
 /*}*/
