@@ -15,24 +15,24 @@ var _ = require('underscore'),
                     throw err;
                 }
 
+
                 if (req.user) {
                     db.collection("votes").find({"user_id": req.user._id}).toArray(function (err, user_votes) {
                         if (err) {
                             throw err;
                         }
-
                         html = templates.main({deadlines: collection,
                             active: "main",
                             user: req.user,
                             user_votes: _.pluck(user_votes, 'id_deadline') //create array with ids of deadline voted by user
-                        });
-
+                            });
                         res.send(html);
-                    })
+                    });
                 } else {
                     html = templates.main({deadlines: collection, active: "main", user: req.user, user_votes: []});
                     res.send(html);
                 }
+
             });
         };
 

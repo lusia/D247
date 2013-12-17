@@ -2,30 +2,31 @@
     display: none;
 }
 
-.description {
+.voting_field {
     margin-top: 15px;
 }
 
-/*.inline_progress {*/
-    /*margin-bottom: 10px;*/
-/*}*/
-
 .progress_striped {
- margin-top: 23px;
+    margin-top: 23px;
 }
 
-/*a {*/
-/*text-decoration: none;*/
-/*color: #000000;*/
-/*font-size: 20px;*/
-/*}*/
+.result {
+    margin-top: 10px;
+}
 
-/*a:hover {*/
-/*color: blue;*/
-/*text-decoration: none;*/
-/*}*/
+.inline_progress {
+    margin-top: 15px;
+}
 
-/*ul#list li {*/
-/*font-size: 15px;*/
+.description {
+    height: 140px;
+    overflow: scroll;
+}
 
-/*}*/
+.description p {
+    word-wrap: break-word;
+}
+
+.link a:hover {
+    color: darkorange;
+}

@@ -1,60 +1,69 @@
 {{#extend "layout"}}
-{{# replace "content"}}
-        <section class="scrollable wrapper">
-            <div class="tab-content">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <section class="panel">
-                            <header class="panel-heading bg bg-success text-center">Add your new deadline.</header>
-                            <div class="panel-body">
-                                <form action="/add_new_deadline" method="post" class="form-horizontal">
-                                    <div class="form-group">
-                                        <label for="name">Name</label>
-                                        <input class="form-control" type="text" id="name" placeholder="Name"
-                                               name="name">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="description">Description</label>
+    {{# replace "content"}}
+        <div class="row">
+            <div class="col-sm-6">
+                <section class="panel">
+                    <header class="panel-heading bg bg-success text-center">Add your new deadline.</header>
+                    <div class="panel-body">
+                        <form action="/add_new_deadline" method="post" class="bs-example form-horizontal">
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label" for="name">Name</label>
 
-                                        <textarea class="form-control" type="text" id="description"
-                                                  placeholder="Description"
-                                                  name="description"></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Date</label>
+                                <div class="col-lg-10">
+                                    <input class="form-control" type="text" id="name" placeholder="Name"
+                                           name="name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label" for="description">Description</label>
 
-                                        <div class="bfh-datepicker" data-format="y-m-d" data-date="today">
-                                        </div>
+                                <div class="col-lg-10">
+                                    <textarea class="form-control" type="text" id="description"
+                                              placeholder="Description"
+                                              name="description"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Date</label>
+
+                                <div class="bfh-datepicker" data-name="date" data-format="y-m-d" data-date="today">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Time</label>
+
+                                <div class="bfh-timepicker" data-name="time" data-time="now">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label" for="name">Please, set status of your
+                                    deadline.</label>
+
+
+                                <div class="radio">
+                                    <div class="col-lg-10">
+                                        <label>
+                                            <input type="radio" value="private" name="status" checked> Private
+                                        </label>
                                     </div>
-                                    <div class="form-group">
-                                        <label>Time</label>
-                                        <div class="bfh-timepicker" data-time="now">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="name">Please, set status of your deadline.</label>
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" value="private" name="status" checked> Private
-                                            </label>
-                                        </div>
-                                        <div class="radio">
+                                    <div class="radio">
+                                        <div class="col-lg-10">
                                             <label>
                                                 <input type="radio" value="public" name="status"> Public
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-
-                                            <button type="submit" class="btn btn-s-md btn-success btn-rounded">Save</button>
-
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-offset-2 col-lg-10">
+                                        <button type="submit" class="btn btn-s-md btn-success btn-rounded">Save</button>
                                     </div>
-                                </form>
-                            </div>
-                        </section>
+                                </div>
+                        </form>
                     </div>
-                </div>
+                </section>
             </div>
-        </section>
+        </div>
     {{/replace}}
 {{/extend}}

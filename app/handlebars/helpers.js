@@ -21,7 +21,7 @@ module.exports = function (app) {
                 } else {
                     msg = err;
                 }
-                return '<li class="label label-warning">' + msg + '</li>';
+                return '<li class="alert alert-danger">' + msg + '</li>';
             }).join('');
 
             out = '<ul>' + out + '</ul>';
@@ -56,7 +56,6 @@ module.exports = function (app) {
     handlebars.registerHelper("voteButtons", function (deadline, votes, user, block) {
         var out = '', loggedUserId = null;
 
-
         if (user) {
             loggedUserId = user._id.toString();
         }
@@ -75,6 +74,5 @@ module.exports = function (app) {
     handlebars.registerHelper("date", function (date, format) {
         return moment(date).format(format);
     });
-
 
 };

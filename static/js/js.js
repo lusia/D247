@@ -1,4 +1,5 @@
 $(function () {
+    var description;
 
     $(".js-vote_up, .js-vote_down").click(function (evt) {
 
@@ -7,7 +8,6 @@ $(function () {
         var $button, $container, deadline_id, vote, user_data;
 
         $button = $(evt.target);
-        console.log($button);
         if ($button.get(0).tagName.toLowerCase() === 'i') {
             $button = $button.parent('a'); //in case user clicked on arrow
         }
@@ -16,7 +16,6 @@ $(function () {
         deadline_id = $container.attr("data-deadlineId");
         vote = $button.attr("data-vote");
         user_data = {"id": deadline_id, "vote": vote};
-console.log(user_data);
         $container.find('.btn').remove();
 
         $.ajax({
@@ -36,7 +35,6 @@ console.log(user_data);
             }
         ).fail(
             function (jqXHR, textStatus, errorThrown) {
-                console.log('sfds');
             }
         );
     });
@@ -54,7 +52,5 @@ console.log(user_data);
         changeMonth: true,
         changeYear: true
     });
-
-
 
 });

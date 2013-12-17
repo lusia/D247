@@ -11,7 +11,6 @@
                     {{#each deadlines}}
                         <div class="col-lg-8">
                             <section class="panel no-borders hbox">
-
                                 <aside>
                                     <div class="panel-body">
                                         <div class="pos-rlt col-lg-5">
@@ -25,13 +24,28 @@
                                         </div>
                                     </div>
                                 </aside>
-
                                 <aside class="bg-primary clearfix lter r-r text-right v-middle">
-                                    <div class="col-lg-8 description">
+                                    <div class="col-lg-8 voting_field">
                                         <strong>Until : </strong><span>{{{date date 'DD-MM-YYYY H:m'}}}</span>
-                                        <blockquote>
-                                            <p>{{description}}</p>
-                                        </blockquote>
+
+                                        <p>Voting:</p>
+                                        {{#voteButtons this ../user_votes ../user}}
+                                            <a class="js-vote_up btn btn-default btn-sm" data-vote="up"
+                                               href="#"><i
+                                                    class="fa fa-thumbs-o-up"></i>UP</a>
+                                            <a class="js-vote_down btn btn-default btn-sm" data-vote="down"
+                                               href="#"><i
+                                                    class="fa fa-thumbs-o-down"></i>DOWN</a><br>
+                                        {{/voteButtons}}
+                                        <span class="badge bg-success result">{{result}}/{{amount}}</span>
+
+
+                                        <div class="progress progress-sm progress-striped active progress_striped">
+                                            <div class="progress-bar progress-bar-success js-progress_bar"
+                                                 data-toggle="tooltip"
+                                                 data-daedlineId='{{_id}}' data-end='{{this.date}}'
+                                                 data-start='{{createDate}}'></div>
+                                        </div>
 
                                     </div>
                                     <div class="col-lg-4 inline_progress">
@@ -53,42 +67,23 @@
                         <div class="col-lg-4" data-deadlineId="{{_id}}">
                             <section class="panel no-borders hbox">
                                 <aside>
-                                    <div class="panel-body">
+                                    <div class="panel-body description">
                                         <div class="row">
                                             <div class="pos-rlt col-lg-10">
-                                                <p>Voting:</p>
-                                                {{#voteButtons this ../user_votes ../user}}
-                                                    <a class="js-vote_up btn btn-default btn-sm" data-vote="up"
-                                                       href="#"><i
-                                                            class="fa fa-thumbs-o-up"></i>UP</a>
-                                                    <a class="js-vote_down btn btn-default btn-sm" data-vote="down"
-                                                       href="#"><i
-                                                            class="fa fa-thumbs-o-down"></i>DOWN</a><br>
-                                                {{/voteButtons}}
-                                                <span class="badge bg-success">{{result}}/{{amount}}</span>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="pos-rlt col-lg-10 progress_striped">
-                                                <div class="progress progress-sm progress-striped active">
-                                                    <div class="progress-bar progress-bar-success js-progress_bar"
-                                                         data-toggle="tooltip"
-                                                         data-daedlineId= {{_id}} data-end= {{date}} data-start
-                                                            = {{createDate}}></div>
-                                                </div>
+
+                                                <blockquote>
+                                                    <p>{{description}}</p>
+                                                </blockquote>
+
                                             </div>
                                         </div>
                                     </div>
                                 </aside>
                             </section>
                         </div>
-
-
                     {{/each}}
-
                 </div>
             </div>
         </section>
     {{/replace}}
-
 {{/extend}}

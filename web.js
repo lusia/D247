@@ -38,7 +38,7 @@ app.use('/static', express.static(__dirname + '/static'));
 
 app.use(express.cookieParser());
 app.use(express.bodyParser());
-app.use(express.logger());
+//app.use(express.logger());
 app.use(expressValidator());
 app.use(express.session({
     store: new RedisStore({
