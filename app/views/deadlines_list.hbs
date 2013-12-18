@@ -19,16 +19,17 @@
                                         </div>
                                         <div class="pos-rlt col-lg-3">
                                             <blockquote>
-                                                <p><a class="text-success" href="/deadline/{{_id}}">{{name}}</a></p>
+                                                <p><a class="deadline_name"
+                                                        href="/deadline/{{_id}}"><strong>{{name}}</strong></a></p>
                                             </blockquote>
                                         </div>
                                     </div>
                                 </aside>
                                 <aside class="bg-primary clearfix lter r-r text-right v-middle">
                                     <div class="col-lg-8 voting_field">
-                                        <strong>Until : </strong><span>{{{date date 'DD-MM-YYYY H:m'}}}</span>
+                                        <strong>Until : </strong><span>{{{date date 'DD-MM-YYYY H:mm'}}}</span>
 
-                                        <p>Voting:</p>
+                                        <p>Votes:</p>
                                         {{#voteButtons this ../user_votes ../user}}
                                             <a class="js-vote_up btn btn-default btn-sm" data-vote="up"
                                                href="#"><i

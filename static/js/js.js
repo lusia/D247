@@ -1,5 +1,5 @@
 $(function () {
-    var description;
+    var updateProgress;
 
     $(".js-vote_up, .js-vote_down").click(function (evt) {
 
@@ -39,15 +39,22 @@ $(function () {
         );
     });
 
-    $("div.js-progress_bar").each(function () {
-        var endDate = $(this).attr("data-end"),
-            createDate = $(this).attr("data-start"),
-            currentDate = new Date().getTime(),
-            timeProgress = (currentDate - createDate) / (endDate - createDate);
-        $(this).css("width", timeProgress + "%");
 
+    updateProgress = function () {
+        $("div.js-progress_bar").each(function () {
+            var endDate = $(this).attr("data-end"),
+                createDate = $(this).attr("data-start"),
+                currentDate = new Date().getTime(),
+                timeProgress = ((currentDate - createDate) / (endDate - createDate)) * 100;
 
-    });
+            $(this).css("width", timeProgress + "%");
+        });
+    }
+
+    setInterval(function () {
+        updateProgress();
+    }, 3000);
+
     $("#datepicker").datepicker({
         changeMonth: true,
         changeYear: true

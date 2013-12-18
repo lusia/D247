@@ -44,7 +44,7 @@ var deadlineController = function (app) {
         name = req.body.name;
         description = req.body.description;
 
-        deadlineDate = moment(req.body.date + ' ' + req.body.time, 'YYYY-MM-DD H:m'); //create moment object
+        deadlineDate = moment(req.body.date + ' ' + req.body.time, 'YYYY-MM-DD H:mm'); //create moment object
 
         user = req.user;
         status = req.body.status;

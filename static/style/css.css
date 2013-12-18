@@ -26,7 +26,9 @@
 .description p {
     word-wrap: break-word;
 }
-
-.link a:hover {
-    color: darkorange;
+.deadline_name {
+    color: #695ea5;
+}
+.deadline_name:hover {
+    color: #fb6b5b;
 }
