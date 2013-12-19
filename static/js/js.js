@@ -39,21 +39,28 @@ $(function () {
         );
     });
 
-
+    /**
+     * update progress bar which show how much project's time was spent
+     */
     updateProgress = function () {
-        $("div.js-progress_bar").each(function () {
-            var endDate = $(this).attr("data-end"),
-                createDate = $(this).attr("data-start"),
+        $("div.js-progresses_container").each(function () {
+            var $this = $(this),
+                endDate = $this.attr("data-end"),
+                createDate = $this.attr("data-start"),
                 currentDate = new Date().getTime(),
-                timeProgress = ((currentDate - createDate) / (endDate - createDate)) * 100;
+                timeProgress = Math.round(((currentDate - createDate) / (endDate - createDate)) * 100);
 
-            $(this).css("width", timeProgress + "%");
+            $this.find(".js-progress_bar").css("width", timeProgress + "%");
+
+            $this.find(".js-rounded_progress").data('easyPieChart').update(timeProgress);
+            $this.find(".js-rounded_progress").find("span.h2").text(timeProgress);
         });
-    }
+    };
 
     setInterval(function () {
         updateProgress();
     }, 3000);
+    updateProgress();
 
     $("#datepicker").datepicker({
         changeMonth: true,
