@@ -2,7 +2,7 @@
   "name": "deadlineApp",
   "version": "0.5.0",
   "description": "",
-  "main": "web.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

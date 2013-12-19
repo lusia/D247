@@ -29,7 +29,7 @@ var deadlineController = function (app) {
      * @param res
      */
     actions["add_new"] = function (req, res) {
-        var html = templates.deadline['new']({text: "Here you can add your new deadline.", active: "add", user: req.user});
+        var html = templates.deadline['new']({active: "add", user: req.user});
         res.send(html);
     };
 

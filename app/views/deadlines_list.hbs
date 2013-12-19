@@ -1,13 +1,11 @@
 {{#extend "layout"}}
-    {{#unless deadlines.length}}
-        {{#replace "head"}}
-            <h3>No deadlines</h3>
-        {{/replace}}
-    {{/unless}}
     {{#replace "content"}}
         <section class="scrollable wrapper">
             <div class="tab-content">
                 <div class="row">
+                    {{#unless deadlines.length}}
+                        <h3>There are no public deadlines.</h3>
+                    {{/unless}}
                     {{#each deadlines}}
                         <div class="col-lg-8">
                             <section class="panel no-borders hbox">
@@ -30,7 +28,6 @@
                                          data-start='{{createDate}}'>
                                         <div class="col-lg-8 voting_field">
                                             <strong>Until : </strong><span>{{{date date 'DD-MM-YYYY H:mm'}}}</span>
-
                                             <p>Votes:</p>
                                             {{#voteButtons this ../user_votes ../user}}
                                                 <a class="js-vote_up btn btn-default btn-sm" data-vote="up"
@@ -41,8 +38,6 @@
                                                         class="fa fa-thumbs-o-down"></i>DOWN</a><br>
                                             {{/voteButtons}}
                                             <span class="badge bg-success result">{{result}}/{{amount}}</span>
-
-
                                             <div class="progress progress-sm progress-striped active progress_striped">
                                                 <div class="progress-bar progress-bar-success js-progress_bar"
                                                      data-toggle="tooltip"
@@ -77,7 +72,6 @@
                                                 <blockquote>
                                                     <p>{{description}}</p>
                                                 </blockquote>
-
                                             </div>
                                         </div>
                                     </div>

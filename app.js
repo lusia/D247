@@ -12,6 +12,7 @@ var express = require("express"),
     Server = require("mongodb").Server,
     S = require('string'),
     fs = require("fs"),
+    moment = require('moment'),
     mainController,
     userController,
     deadlineController,
@@ -21,6 +22,7 @@ var express = require("express"),
     RedisStore = require('connect-redis')(express),
     NODE_ENV = process.env.NODE_ENV || 'dev',
     conf;
+
 
 require('handlebars-layouts')(handlebars);
 require('js-yaml'); //automatically register support for yaml files
@@ -85,9 +87,16 @@ passport.use(new LocalStrategy(
 ));
 
 app.use(function (err, req, res, next) {
-    res.send(500, 'Something broke!');
+    fs.writeFile(__dirname + "/log/" + moment().format("YYYY-MM-DD") + ".log", moment().format("HH:mm") + " " +
+        err.stack + "\n", {"flag": "a"}, function (err) {
+        if (err) {
+            console.log("err");
+        } else {
+            console.log("The file was saved");
+        }
+        res.send(500, 'Something is broken!');
+    });
 });
-
 passport.serializeUser(function (user, done) {
     done(null, user._id);
 });
