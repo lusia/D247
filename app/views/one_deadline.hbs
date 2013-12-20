@@ -8,67 +8,90 @@
                     <div class="col-lg-8">
                         <section class="panel no-borders hbox">
                             <aside>
+                                <div class="panel-body">
+                                    <div class="pos-rlt col-lg-4">
+                                        {{{gravatar deadline.user_email}}}
 
-                                <div class="pos-rlt">
-                                    {{{gravatar deadline.user_email}}}
-                                    <span class="arrow right hidden-xs"></span>
+                                    </div>
+                                    <div class="pos-rlt col-lg-8">
+                                        <blockquote>
+                                            <p class="name_of_deadline"><a href="#">{{deadline.name}}</a></p>
+                                        </blockquote>
+                                    </div>
+
                                 </div>
                             </aside>
 
                             <aside class="bg-primary clearfix lter r-r text-right v-middle">
-                                <div class="col-lg-8">
+                                <div class="js-progresses_container" data-end='{{deadline.date}}'
+                                     data-start='{{deadline.createDate}}'>
+                                    <div class="col-lg-7">
+                                        <strong>Until : </strong><span>{{{date deadline.date 'DD-MM-YYYY H:mm'}}}</span>
 
-                                    <p>{{deadline.name}}</p>
-                                    <strong>Until : </strong><span>{{{date deadline.date 'DD-MM-YYYY H:m'}}}</span>
+                                        <p>Votes:</p>
+                                        <span class="badge bg-success">{{deadline.result}}
+                                            /{{deadline.amount}}</span>
 
-                                    <p>{{deadline.description}}</p>
-
-                                    <div class="progress progress-sm progress-striped active">
-                                        <div class="progress-bar progress-bar-success js-progress_bar"
-                                             data-toggle="tooltip"
-                                             data-daedlineId= {{_id}} data-end= {{date}} data-start
-                                                = {{createDate}}></div>
+                                        <div class="progress progress-sm progress-striped active result">
+                                            <div class="progress-bar progress-bar-success js-progress_bar"
+                                                 data-toggle="tooltip"
+                                                 data-daedlineId='{{deadline._id}}'></div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="inline m-t-sm">
-                                        <div class="easypiechart easyPieChart" data-percent="32.5"
-                                             data-line-width="8"
-                                             data-bar-color="#ffffff" data-track-color="#c79d43"
-                                             data-scale-color="false"
-                                             data-size="100"
-                                             style="width: 100px; height: 100px; line-height: 100px;"><span
-                                                class="h2">32</span>%
-                                            <canvas width="100" height="100"></canvas>
+                                    <div class="col-lg-3">
+                                        <div class="inline m-t-sm">
+                                            <div class="easypiechart easyPieChart js-rounded_progress"
+                                                 data-percent=""
+                                                 data-line-width="8"
+                                                 data-bar-color="#ffffff" data-track-color="#c79d43"
+                                                 data-scale-color="false"
+                                                 data-size="100"
+                                                 style="width: 100px; height: 100px; line-height: 100px;"><span
+                                                    class="h2"></span>%
+                                                <canvas width="80" height="80"></canvas>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </aside>
                         </section>
                     </div>
-                    <div class="col-lg-4">
-                        <p>Voting:</p>
-                        <span class="badge bg-success">{{deadline.result}}/{{deadline.amount}}</span>
+
+                    <div class="col-lg-4" data-deadlineId="{{_id}}">
+                        <section class="panel no-borders hbox">
+                            <aside>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="pos-rlt col-lg-10">
+
+                                            <blockquote>
+                                                <p>{{deadline.description}}</p>
+                                            </blockquote>
+                                        </div>
+                                    </div>
+                                </div>
+                            </aside>
+                        </section>
                     </div>
                 </div>
             </div>
-                    <div id="disqus_thread"></div>
-                    <script type="text/javascript">
-                        /* * * CONFIGURATION VARIABLES: THIS CODE IS ONLY AN EXAMPLE * * */
-                        var disqus_shortname = 'deadline01'; // Required - Replace example with your forum shortname
-                        var disqus_identifier = '{{deadline._id}}';
-                        var disqus_title = 'a unique title for each page where Disqus is present';
-                        var disqus_url = 'a unique URL for each page where Disqus is present';
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+                /* * * CONFIGURATION VARIABLES: THIS CODE IS ONLY AN EXAMPLE * * */
+                var disqus_shortname = 'deadline01'; // Required - Replace example with your forum shortname
+                var disqus_identifier = '{{deadline._id}}';
+                var disqus_title = 'a unique title for each page where Disqus is present';
+                var disqus_url = 'a unique URL for each page where Disqus is present';
 
-                        /* * * DON'T EDIT BELOW THIS LINE * * */
-                        (function () {
-                            var dsq = document.createElement('script');
-                            dsq.type = 'text/javascript';
-                            dsq.async = true;
-                            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                        })();
-                    </script>
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function () {
+                    var dsq = document.createElement('script');
+                    dsq.type = 'text/javascript';
+                    dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
         </section>
     {{/replace}}
 {{/extend}}

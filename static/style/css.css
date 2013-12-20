@@ -2,33 +2,32 @@
     display: none;
 }
 
-.voting_field {
-    margin-top: 15px;
-}
-
-.progress_striped {
-    margin-top: 23px;
-}
-
 .result {
-    margin-top: 10px;
-}
-
-.rounded_progress {
     margin-top: 15px;
 }
 
-.description {
-    height: 140px;
-    overflow: scroll;
+.link_name_of_deadline {
+    height: 120px;
+    overflow: hidden;
 }
 
-.description p {
-    word-wrap: break-word;
-}
-.deadline_name {
+.link_name_of_deadline a {
     color: #695ea5;
+
 }
-.deadline_name:hover {
+
+.link_name_of_deadline a:hover {
     color: #fb6b5b;
+}
+
+blockquote p {
+    width: 300px;
+    text-justify: inter-word;
+    overflow: hidden;
+}
+
+p.name_of_deadline {
+    width: 215px;
+    text-justify: inter-word;
+    padding-right: 5px;
 }

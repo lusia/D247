@@ -7,18 +7,17 @@
                         <h3>There are no public deadlines.</h3>
                     {{/unless}}
                     {{#each deadlines}}
-                        <div class="col-lg-8">
+                        <div class="col-lg-12">
                             <section class="panel no-borders hbox">
                                 <aside>
                                     <div class="panel-body">
-                                        <div class="pos-rlt col-lg-5">
-                                            <!--<span class="arrow right hidden-xs"></span>-->
+                                        <div class="pos-rlt col-lg-3">
+
                                             {{{gravatar user_email}}}
                                         </div>
-                                        <div class="pos-rlt col-lg-3">
+                                        <div class="pos-rlt col-lg-8 link_name_of_deadline">
                                             <blockquote>
-                                                <p><a class="deadline_name"
-                                                      href="/deadline/{{_id}}"><strong>{{name}}</strong></a></p>
+                                                <p><a href="/deadline/{{_id}}"><strong>{{name}}</strong></a></p>
                                             </blockquote>
                                         </div>
                                     </div>
@@ -26,7 +25,7 @@
                                 <aside class="bg-primary clearfix lter r-r text-right v-middle">
                                     <div class="js-progresses_container" data-end='{{this.date}}'
                                          data-start='{{createDate}}'>
-                                        <div class="col-lg-8 voting_field">
+                                        <div class="col-lg-6">
                                             <strong>Until : </strong><span>{{{date date 'DD-MM-YYYY H:mm'}}}</span>
                                             <p>Votes:</p>
                                             {{#voteButtons this ../user_votes ../user}}
@@ -37,14 +36,14 @@
                                                    href="#"><i
                                                         class="fa fa-thumbs-o-down"></i>DOWN</a><br>
                                             {{/voteButtons}}
-                                            <span class="badge bg-success result">{{result}}/{{amount}}</span>
-                                            <div class="progress progress-sm progress-striped active progress_striped">
+                                            <span class="badge bg-success">{{result}}/{{amount}}</span>
+                                            <div class="progress progress-sm progress-striped active result">
                                                 <div class="progress-bar progress-bar-success js-progress_bar"
                                                      data-toggle="tooltip"
                                                      data-daedlineId='{{_id}}'></div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-4 rounded_progress">
+                                        <div class="col-lg-4">
                                             <div class="inline m-t-sm">
                                                 <div class="easypiechart easyPieChart js-rounded_progress"
                                                      data-percent=""
@@ -56,22 +55,6 @@
                                                         class="h2"></span>%
                                                     <canvas width="80" height="80"></canvas>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </aside>
-                            </section>
-                        </div>
-                        <div class="col-lg-4" data-deadlineId="{{_id}}">
-                            <section class="panel no-borders hbox">
-                                <aside>
-                                    <div class="panel-body description">
-                                        <div class="row">
-                                            <div class="pos-rlt col-lg-10">
-
-                                                <blockquote>
-                                                    <p>{{description}}</p>
-                                                </blockquote>
                                             </div>
                                         </div>
                                     </div>
