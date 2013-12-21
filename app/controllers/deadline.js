@@ -12,15 +12,16 @@ var deadlineController = function (app) {
      */
     actions.deadlines = function (req, res) {
 
-        db.collection("deadlines").find({"user_id": req.user._id}).toArray(function (err, collection) {
-            var html;
-            if (err) {
-                throw err;
-            }
+        db.collection("deadlines").find({"user_id": req.user._id, "date": {$gt: new Date().getTime()}})
+            .toArray(function (err, collection) {
+                var html;
+                if (err) {
+                    throw err;
+                }
 
-            html = templates.deadline["list_belongs_to_user"]({deadlines: collection, active: "my_deadlines", user: req.user, user_votes: []});
-            res.send(html);
-        });
+                html = templates.deadline["list_belongs_to_user"]({deadlines: collection, active: "my_deadlines", user: req.user, user_votes: []});
+                res.send(html);
+            });
     };
 
     /**
