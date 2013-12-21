@@ -20,7 +20,7 @@ var express = require("express"),
     oneDeadlineController,
     expressValidator = require('express-validator'),
     RedisStore = require('connect-redis')(express),
-    NODE_ENV = process.env.NODE_ENV || 'dev',
+    NODE_ENV = process.env.PASSENGER_ENV || 'dev',
     conf;
 
 
