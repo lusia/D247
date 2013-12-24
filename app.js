@@ -25,7 +25,7 @@ var express = require("express"),
 
 require('handlebars-layouts')(handlebars);
 require('js-yaml'); //automatically register support for yaml files
-conf = require('./app/config/' + NODE_ENV + '.yaml');
+conf = require('./app/config/' + NODE_ENV + '.yaml'); //load config file
 
 app.set('app_dir', __dirname);
 app.set('handlebars', handlebars);
@@ -56,7 +56,7 @@ app.use(app.router);
 var mongoclient = new MongoClient(new Server(conf.db.host, conf.db.port, {"native_parser": true}));
 var db = mongoclient.db(conf.db.name);
 
-app.set('templates', require('./app/handlebars/templates.js').compileTemplates(app));
+app.set('templates', require('./app/handlebars/templates.js').compileTemplates(app)); //precompile templates and save them
 app.set('db', db);
 
 /**
