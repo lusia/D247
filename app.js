@@ -17,7 +17,6 @@ var express = require("express"),
     userController,
     deadlineController,
     aboutController,
-    oneDeadlineController,
     expressValidator = require('express-validator'),
     RedisStore = require('connect-redis')(express),
     NODE_ENV = process.env.PASSENGER_ENV || 'dev',
@@ -40,7 +39,6 @@ app.use('/static', express.static(__dirname + '/static'));
 
 app.use(express.cookieParser());
 app.use(express.bodyParser());
-//app.use(express.logger());
 app.use(expressValidator());
 app.use(express.session({
     store: new RedisStore({
