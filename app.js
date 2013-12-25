@@ -17,6 +17,7 @@ var express = require("express"),
     userController,
     deadlineController,
     aboutController,
+    voteController,
     expressValidator = require('express-validator'),
     RedisStore = require('connect-redis')(express),
     NODE_ENV = process.env.PASSENGER_ENV || 'dev',
@@ -117,15 +118,15 @@ app.get("/logout", userController.logout);
 
 deadlineController = require("./app/controllers/deadline.js")(app);
 app.get("/my_deadlines", deadlineController.deadlines);
-app.get("/add_new_deadline", deadlineController["add_new"]);
-app.post("/add_new_deadline", deadlineController["add_new_post"]);
+app.get("/add_new_deadline", deadlineController["add_new__get"]);
+app.post("/add_new_deadline", deadlineController["add_new__post"]);
+app.get("/deadline/:id", deadlineController["display_one"]);
+
+voteController = require("./app/controllers/vote.js")(app);
 app.post("/deadlines/vote", deadlineController["vote_post"]);
 
 aboutController = require('./app/controllers/about.js')(app);
 app.get("/about", aboutController.about);
-
-oneDeadlineController = require('./app/controllers/one_deadline.js')(app);
-app.get("/deadline/:id", oneDeadlineController["deadline_post"]);
 
 mongoclient.open(function (err, mongoclient) {
     app.listen(8080);

@@ -29,7 +29,7 @@ var deadlineController = function (app) {
      * @param req
      * @param res
      */
-    actions["add_new"] = function (req, res) {
+    actions["add_new__get"] = function (req, res) {
         var html = templates.deadline['new']({active: "add", user: req.user});
         res.send(html);
     };
@@ -39,7 +39,7 @@ var deadlineController = function (app) {
      * @param req
      * @param res
      */
-    actions["add_new_post"] = function (req, res) {
+    actions["add_new__post"] = function (req, res) {
         var name, description, user, status, deadline, deadlineDate;
 
         name = req.body.name;
@@ -141,7 +141,7 @@ var deadlineController = function (app) {
      * @param req
      * @param res
      */
-    actions["deadline_post"] = function (req, res) {
+    actions["display_one"] = function (req, res) {
         var html, date, newDate, dateString;
 
         db.collection("deadlines").findOne({"_id": new ObjectId(req.params.id)}, function (err, deadline) {
@@ -153,8 +153,7 @@ var deadlineController = function (app) {
             newDate = new Date(date);
             dateString = newDate.toUTCString();
 
-
-            html = templates.one_deadline({user: req.user, dateString: dateString, deadline: deadline});
+            html = templates.deadline.one({user: req.user, dateString: dateString, deadline: deadline});
             res.send(html);
         });
 
