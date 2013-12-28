@@ -5,7 +5,7 @@
             <div class="tab-content">
                 <div class="row">
 
-                    <div class="col-lg-12">
+                    <div class="col-lg-10">
                         <section class="panel no-borders hbox">
                             <aside>
                                 <div class="panel-body">
@@ -21,44 +21,46 @@
 
                                 </div>
                             </aside>
+                            <div class="col-lg-10">
+                                <aside class="bg-primary clearfix lter r-r text-right v-middle">
+                                    <div class="js-progresses_container" data-end='{{deadline.date}}'
+                                         data-start='{{deadline.createDate}}'>
+                                        <div class="col-lg-8">
+                                            <strong>Until
+                                                : </strong><span>{{{date deadline.date 'DD-MM-YYYY H:mm'}}}</span>
 
-                            <aside class="bg-primary clearfix lter r-r text-right v-middle">
-                                <div class="js-progresses_container" data-end='{{deadline.date}}'
-                                     data-start='{{deadline.createDate}}'>
-                                    <div class="col-lg-7">
-                                        <strong>Until : </strong><span>{{{date deadline.date 'DD-MM-YYYY H:mm'}}}</span>
-
-                                        <p>Votes:</p>
+                                            <p>Votes:</p>
                                         <span class="badge bg-success">{{deadline.result}}
                                             /{{deadline.amount}}</span>
 
-                                        <div class="progress progress-sm progress-striped active result">
-                                            <div class="progress-bar progress-bar-success js-progress_bar"
-                                                 data-toggle="tooltip"
-                                                 data-daedlineId='{{deadline._id}}'></div>
+                                            <div class="progress progress-sm progress-striped active result">
+                                                <div class="progress-bar progress-bar-success js-progress_bar"
+                                                     data-toggle="tooltip"
+                                                     data-daedlineId='{{deadline._id}}'></div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div class="inline m-t-sm">
-                                            <div class="easypiechart easyPieChart js-rounded_progress"
-                                                 data-percent=""
-                                                 data-line-width="8"
-                                                 data-bar-color="#ffffff" data-track-color="#c79d43"
-                                                 data-scale-color="false"
-                                                 data-size="100"
-                                                 style="width: 100px; height: 100px; line-height: 100px;"><span
-                                                    class="h2"></span>%
-                                                <canvas width="80" height="80"></canvas>
+                                        <div class="col-lg-4 rounded_progress">
+                                            <div class="inline m-t-sm">
+                                                <div class="easypiechart easyPieChart js-rounded_progress"
+                                                     data-percent=""
+                                                     data-line-width="8"
+                                                     data-bar-color="#ffffff" data-track-color="#c79d43"
+                                                     data-scale-color="false"
+                                                     data-size="100"
+                                                     style="width: 100px; height: 100px; line-height: 100px;"><span
+                                                        class="h2"></span>%
+                                                    <canvas width="80" height="80"></canvas>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </aside>
+                                </aside>
+                            </div>
                         </section>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-12" data-deadlineId="{{_id}}">
+                    <div class="col-lg-9" data-deadlineId="{{_id}}">
                         <section class="panel no-borders hbox">
                             <aside>
                                 <div class="panel-body">

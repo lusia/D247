@@ -20,14 +20,16 @@
     color: #fb6b5b;
 }
 
-blockquote p {
-    width: 300px;
-    text-justify: inter-word;
-    overflow: hidden;
-}
-
 p.name_of_deadline {
     width: 215px;
     text-justify: inter-word;
     padding-right: 5px;
+}
+
+.rounded_progress {
+    margin-bottom: 10px;
+}
+
+.js-progresses_container {
+    margin-top: 5px;
 }
