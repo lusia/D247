@@ -5,11 +5,11 @@
             <div class="tab-content">
                 <div class="row">
 
-                    <div class="col-lg-8">
+                    <div class="col-lg-12">
                         <section class="panel no-borders hbox">
                             <aside>
                                 <div class="panel-body">
-                                    <div class="pos-rlt col-lg-4">
+                                    <div class="pos-rlt col-lg-3">
                                         {{{gravatar deadline.user_email}}}
 
                                     </div>
@@ -38,7 +38,7 @@
                                                  data-daedlineId='{{deadline._id}}'></div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-4">
                                         <div class="inline m-t-sm">
                                             <div class="easypiechart easyPieChart js-rounded_progress"
                                                  data-percent=""
@@ -56,25 +56,32 @@
                             </aside>
                         </section>
                     </div>
-
-                    <div class="col-lg-4" data-deadlineId="{{_id}}">
+                </div>
+                <div class="row">
+                    <div class="col-lg-12" data-deadlineId="{{_id}}">
                         <section class="panel no-borders hbox">
                             <aside>
                                 <div class="panel-body">
-                                    <div class="row">
-                                        <div class="pos-rlt col-lg-10">
 
-                                            <blockquote>
-                                                <p>{{deadline.description}}</p>
-                                            </blockquote>
+                                    <article class="media">
+                                        <div class="pull-left"><span class="fa fa-stack fa-2x"> <i
+                                                class="fa fa-circle text-primary fa-stack-2x"></i> <i
+                                                class="fa fa-file text-white fa-stack-1x"></i> </span></div>
+                                        <div class="media-body"><a href="#" class="h4">Description</a>
+
+                                            <p>{{deadline.description}}</p>
+
                                         </div>
-                                    </div>
+                                    </article>
+
                                 </div>
                             </aside>
                         </section>
                     </div>
                 </div>
+
             </div>
+            <div class="line pull-in"></div>
             <div id="disqus_thread"></div>
             <script type="text/javascript">
                 /* * * CONFIGURATION VARIABLES: THIS CODE IS ONLY AN EXAMPLE * * */
