@@ -7,11 +7,11 @@
                         <h3>There are no public deadlines.</h3>
                     {{/unless}}
                     {{#each deadlines}}
-                        <div class="col-lg-10">
+                        <div class="col-lg-9">
                             <section class="panel no-borders hbox">
                                 <aside>
                                     <div class="panel-body">
-                                        <div class="pos-rlt col-lg-3">
+                                        <div class="pos-rlt col-lg-4">
 
                                             {{{gravatar user_email}}}
                                         </div>
@@ -22,9 +22,9 @@
                                         </div>
                                     </div>
                                 </aside>
-                                <div class="col-lg-10">
-                                    <aside class="bg-primary clearfix lter r-r text-right v-middle">
-                                        <div class="js-progresses_container" data-end='{{this.date}}'
+                                <div class="col-lg-12 col-lg-offset-1">
+                                    <aside class="bg-primary clearfix lter r-r text-right v-middle progress_block">
+                                        <div class="js-progresses_container progresses_container" data-end='{{this.date}}'
                                              data-start='{{createDate}}'>
                                             <div class="col-lg-8">
                                                 <strong>Until : </strong><span>{{{date date 'DD-MM-YYYY H:mm'}}}</span>

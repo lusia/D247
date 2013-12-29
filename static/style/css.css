@@ -30,6 +30,9 @@ p.name_of_deadline {
     margin-bottom: 10px;
 }
 
-.js-progresses_container {
+.progresses_container {
     margin-top: 5px;
+}
+.progress_block {
+    height: 150px;
 }
