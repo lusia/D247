@@ -2,13 +2,13 @@
     display: none;
 }
 
-.result {
-    margin-top: 15px;
-}
-
 .link_name_of_deadline {
     height: 120px;
     overflow: hidden;
+}
+
+.result {
+    margin-top: 15px;
 }
 
 .link_name_of_deadline a {
@@ -31,8 +31,13 @@ p.name_of_deadline {
 }
 
 .progresses_container {
-    margin-top: 5px;
+    margin-top: 20px;
 }
+
+.progresses_container div div {
+    margin-bottom: 10px;
+}
+
 .progress_block {
-    height: 150px;
+    height: 162px;
 }

@@ -27,13 +27,15 @@
                                          data-end='{{deadline.date}}'
                                          data-start='{{deadline.createDate}}'>
                                         <div class="col-lg-8">
-                                            <strong>Until
-                                                : </strong><span>{{{date deadline.date 'DD-MM-YYYY H:mm'}}}</span>
-
-                                            <p>Votes:</p>
-                                        <span class="badge bg-success">{{deadline.result}}
+                                            <div>
+                                                <strong>Until: </strong>
+                                                <span>{{{date deadline.date 'DD-MM-YYYY H:mm'}}}</span>
+                                            </div>
+                                            <div>
+                                                Votes:
+                                        <span class="btn btn-success btn-xs">{{deadline.result}}
                                             /{{deadline.amount}}</span>
-
+                                            </div>
                                             <div class="progress progress-sm progress-striped active result">
                                                 <div class="progress-bar progress-bar-success js-progress_bar"
                                                      data-toggle="tooltip"

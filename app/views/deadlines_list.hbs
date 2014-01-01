@@ -24,28 +24,30 @@
                                 </aside>
                                 <div class="col-lg-12 col-lg-offset-1">
                                     <aside class="bg-primary clearfix lter r-r text-right v-middle progress_block">
-                                        <div class="js-progresses_container progresses_container" data-end='{{this.date}}'
+                                        <div class="js-progresses_container progresses_container"
+                                             data-end='{{this.date}}'
                                              data-start='{{createDate}}'>
                                             <div class="col-lg-8">
-                                                <strong>Until : </strong><span>{{{date date 'DD-MM-YYYY H:mm'}}}</span>
-
-                                                <p>Votes:</p>
-                                                {{#voteButtons this ../user_votes ../user}}
-                                                    <a class="js-vote_up btn btn-default btn-sm" data-vote="up"
-                                                       href="#"><i
-                                                            class="fa fa-thumbs-o-up"></i>UP</a>
-                                                    <a class="js-vote_down btn btn-default btn-sm" data-vote="down"
-                                                       href="#"><i
-                                                            class="fa fa-thumbs-o-down"></i>DOWN</a><br>
-                                                {{/voteButtons}}
-                                                <span class="badge bg-success">{{result}}/{{amount}}</span>
-
+                                                <div><strong>Until : </strong>
+                                                    <span>{{{date date 'DD-MM-YYYY H:mm'}}}</span></div>
+                                                <div>
+                                                    Votes:
+                                                    {{#voteButtons this ../user_votes ../user}}
+                                                        <a class="js-vote_up btn btn-default btn-xs" data-vote="up"
+                                                           href="#"><i class="fa fa-thumbs-o-up"></i>UP</a>
+                                                        <a class="js-vote_down btn btn-default btn-xs"
+                                                           data-vote="down"
+                                                           href="#"><i class="fa fa-thumbs-o-down"></i>DOWN</a>
+                                                    {{/voteButtons}}
+                                                    <span class="btn btn-success btn-xs">{{result}}/{{amount}}</span>
+                                                </div>
                                                 <div class="progress progress-sm progress-striped active result">
                                                     <div class="progress-bar progress-bar-success js-progress_bar"
                                                          data-toggle="tooltip"
                                                          data-daedlineId='{{_id}}'></div>
                                                 </div>
                                             </div>
+
                                             <div class="col-lg-4 rounded_progress">
                                                 <div class="inline m-t-sm">
                                                     <div class="easypiechart easyPieChart js-rounded_progress"
@@ -61,6 +63,7 @@
                                                 </div>
                                             </div>
                                         </div>
+
                                     </aside>
                                 </div>
                             </section>
