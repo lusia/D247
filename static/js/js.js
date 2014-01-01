@@ -16,22 +16,22 @@ $(function () {
         deadline_id = $container.attr("data-deadlineId");
         vote = $button.attr("data-vote");
         user_data = {"id": deadline_id, "vote": vote};
-        $container.find('.btn').remove();
+        $container.find('.btn:eq(0,1)').remove();
 
         $.ajax({
-            url: "http://localhost:8080/deadlines/vote",
+            url: "/deadlines/vote",
             type: "POST",
             data: user_data,
             dataType: "json",
             statusCode: {
                 401: function () {
                     //show info you must be logged to vote
-                    $container.find("span:eq(0)").text("You have to be logged in.").show().addClass("badge bg-error");
+                    $container.find("span:eq(0)").text("You have to be logged in").show();
                 }
             }
         }).done(
             function (data) { //data from server
-                $container.find("span:eq(0)").text(data.result + "/" + data.amount).show().addClass("badge bg-success");
+                $container.find("span:eq(0)").text(data.result + "/" + data.amount).show();
             }
         ).fail(
             function (jqXHR, textStatus, errorThrown) {
