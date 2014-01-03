@@ -1,11 +1,30 @@
 {{#extend "layout"}}
-
     {{#replace "content"}}
-<h3>
-    Welcome {{user.email}} in the 'Deadline' webpage.
-</h3>
-
-This application is really helpfull in every day. Here you can add you plans, goals.......
+        <section class="scrollable wrapper">
+            <div class="tab-content">
+                <div class="row">
+                    <div class="col-lg-10">
+                        <div class="timeline-caption">
+                            <div class="panel bg-primary lter no-borders">
+                                <div class="panel-body">
+                                    <h2>
+                                        Welcome {{user.email}} in the 'Deadline' webpage.
+                                    </h2>
+                                    <span class="timeline-icon"><i class="fa fa-tasks time-icon"></i></span>
+                                    <h4>This social application is really helpfull in every day. Here you can share your
+                                        dreams, plans and point the goals. Maybe you will find some inspiration from
+                                        others or support to achieve your target.
+                                    </h4>
+                                    <h6>Enjoy it!</h6><span><i class="fa fa-smile-o"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     {{/replace}}
-
 {{/extend}}
+
+
+
