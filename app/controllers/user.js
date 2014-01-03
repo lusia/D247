@@ -3,6 +3,7 @@ var flash = require('connect-flash'),
     crypto = require("crypto"),
     querystring = require('querystring'),
     passport = require("passport"),
+    mailer = require('express-mailer'),
     LocalStrategy = require('passport-local').Strategy;
 
 userController = function (app) {
