@@ -1,4 +1,4 @@
-D247
+[D247] (http://d247.org)
 ========
 
 The main idea behind this project is to help you achieve your goals, plans and realize your dreams. Useful time indicator
