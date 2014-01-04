@@ -1,35 +1,42 @@
 {{#extend "layout"}}
     {{#replace "content"}}
-        <section class="scrollable wrapper">
-            <div class="tab-content">
-                <div class="row">
-                    <div class="col-lg-10">
-                        <div class="timeline-caption">
-                            <div class="panel bg-primary lter no-borders">
-                                <div class="panel-body">
-                                    <h2>
-                                        Welcome {{user.email}} in the 'D247' webportal.
-                                    </h2>
+        <header class="header bg-white b-b">
+            <p>About</p>
+        </header>
+        <div class="row">
+            <div class="col-sm-6">
+                <section class="panel">
+                    <header class="panel-heading bg bg-success text-center">&nbsp;
+                    </header>
+                    <div class="panel-body">
 
-                                    <h4>The main idea behind this project is to help you achieve your goals, plans and
-                                        realize your dreams.
-                                        Useful time indicator show how much time has passed until time when you expect
-                                        to realize your plans. Don't hesitate to share your small plans, ex: "Clean my
-                                        room" and those bigger one, like "Find new job", "Buy a house". I hope you will
-                                        find useful and easy to use. <i class="fa fa-smile-o"></i>
-                                        <br>
-                                        <br>
-                                        If you find any issue please report it <a
-                                                href="https://github.com/lusia/deadline/issues"
-                                                target="_blank">here</a>
-                                    </h4>
-                                </div>
+                        <article class="media">
+                            <div class="media-body"><a href="#" class="h4">Hi {{user.email}}, welcome in the 'D247'
+                                webportal.</a>
+                                <br>
+                                <br>
+
+                                <p class="about_description">The main idea behind this project is to help you achieve your goals, plans and
+                                    realize your dreams.
+                                    Useful time indicator show how much time has passed until time when you expect
+                                    to realize your plans. Don't hesitate to share your small plans, ex: "Clean my
+                                    room" and those bigger one, like "Find new job", "Buy a house". I hope you will
+                                    find useful and easy to use. <i class="fa fa-smile-o"></i>
+                                    <br>
+                                    <br>
+                                    If you find any issue please report it <a class="link_to_my_page"
+                                            href="https://github.com/lusia/deadline/issues"
+                                            target="_blank">here</a></p>
+
                             </div>
-                        </div>
+                        </article>
+
+                        <h4>
+                        </h4>
                     </div>
-                </div>
+                </section>
             </div>
-        </section>
+        </div>
     {{/replace}}
 {{/extend}}
 
