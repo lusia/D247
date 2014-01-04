@@ -41,3 +41,16 @@ p.name_of_deadline {
 .progress_block {
     height: 162px;
 }
+
+.about_description {
+    line-height: 30px;
+}
+
+a.link_to_my_page {
+    color: #695ea5;
+    font-weight: bold;
+}
+
+a.link_to_my_page:hover {
+    color: #fb6b5b;
+}
