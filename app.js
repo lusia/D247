@@ -117,6 +117,7 @@ app.post("/sign", userController.sign_post);
 app.get("/login", userController.login);
 app.post("/login", userController.login_post);
 app.get("/logout", userController.logout);
+app.get("/login/remind_password", userController["remind_password"]);
 
 deadlineController = require("./app/controllers/deadline.js")(app);
 app.get("/my_deadlines", deadlineController.deadlines);

@@ -4,7 +4,8 @@ var flash = require('connect-flash'),
     querystring = require('querystring'),
     passport = require("passport"),
     mailer = require('express-mailer'),
-    LocalStrategy = require('passport-local').Strategy;
+    LocalStrategy = require('passport-local').Strategy,
+    userController;
 
 userController = function (app) {
     var db = app.get('db'), templates = app.get('templates'), actions = {};
@@ -84,13 +85,12 @@ userController = function (app) {
     };
 
     /**
-     * This action render login form
+     * This action renders login form
      * @param req
      * @param res
      */
     actions.login = function (req, res) {
         var html = templates.user.login({req: req, active: "login"});
-
         res.send(html);
     };
 
@@ -101,6 +101,16 @@ userController = function (app) {
     actions.login_post = passport.authenticate("local", {successRedirect: '/my_deadlines', failureRedirect: '/login',
         failureFlash: 'Could not authenticate, please try again'});
 
+    /**
+     * This action renders remind password form
+     * @param req
+     * @param res
+     */
+    actions.remind_password = function (req, res) {
+        var html = templates.user.remind_password({});
+        res.send(html);
+    };
+
     actions.logout = function (req, res) {
         req.session.destroy(function () {
             res.redirect('/login');
@@ -108,7 +118,7 @@ userController = function (app) {
     };
 
     return actions;
-}
+};
 
 module.exports = userController;
 
