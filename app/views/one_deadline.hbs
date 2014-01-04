@@ -1,6 +1,9 @@
 {{#extend "layout"}}
 
     {{#replace "content"}}
+        <header class="header bg-white b-b">
+            <p>Deadline</p>
+        </header>
         <section class="scrollable wrapper">
             <div class="tab-content">
                 <div class="row">
@@ -33,8 +36,7 @@
                                             </div>
                                             <div>
                                                 Votes:
-                                        <span class="btn btn-success btn-xs">{{deadline.result}}
-                                            /{{deadline.amount}}</span>
+                                        <span class="btn btn-success btn-xs">{{deadline.result}}/{{deadline.amount}}</span>
                                             </div>
                                             <div class="progress progress-sm progress-striped active result">
                                                 <div class="progress-bar progress-bar-success js-progress_bar"
@@ -95,8 +97,8 @@
                 /* * * CONFIGURATION VARIABLES: THIS CODE IS ONLY AN EXAMPLE * * */
                 var disqus_shortname = 'deadline01'; // Required - Replace example with your forum shortname
                 var disqus_identifier = '{{deadline._id}}';
-                var disqus_title = 'a unique title for each page where Disqus is present';
-                var disqus_url = 'a unique URL for each page where Disqus is present';
+                var disqus_title = '{{deadline.name}}';
+                var disqus_url = 'http://d247.org/deadline/{{deadline._id}}';
 
                 /* * * DON'T EDIT BELOW THIS LINE * * */
                 (function () {

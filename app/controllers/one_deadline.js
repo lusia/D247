@@ -21,7 +21,7 @@ var ObjectId = require('mongodb').ObjectID,
                 dateString = newDate.toUTCString();
 
 
-                html = templates.one_deadline({user: req.user, dateString : dateString, deadline : deadline});
+                html = templates.one_deadline({user: req.user, dateString: dateString, deadline: deadline});
                 res.send(html);
             });
 

@@ -17,7 +17,7 @@ var _ = require('underscore'),
                         throw err;
                     }
                     if (collection.length === 0) {
-                        html = templates.main({deadlines: [], active: "main", user: req.user, user_votes: []});
+                        html = templates.main({text: "Home", deadlines: [], active: "main", user: req.user, user_votes: []});
                         res.send(html);
                     }
 
@@ -34,7 +34,7 @@ var _ = require('underscore'),
                             res.send(html);
                         });
                     } else {
-                        html = templates.main({deadlines: collection, active: "main", user: req.user, user_votes: []});
+                        html = templates.main({text: "Home", deadlines: collection, active: "main", user: req.user, user_votes: []});
                         res.send(html);
                     }
 
