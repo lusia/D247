@@ -29,6 +29,9 @@ require('handlebars-layouts')(handlebars);
 require('js-yaml'); //automatically register support for yaml files
 conf = require('./app/config/' + NODE_ENV + '.yaml');
 
+app.set("conf", conf);
+
+
 app.set('app_dir', __dirname);
 app.set('handlebars', handlebars);
 require('./app/handlebars/partials.js')(app);
@@ -50,7 +53,8 @@ app.use(express.session({
         db: conf.session.redis.db,
         pass: conf.session.redis.pass
     }),
-    secret: conf.session.redis.secret }));
+    secret: conf.session.redis.secret
+}));
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
@@ -113,11 +117,12 @@ app.get("/", mainController.main);
 
 userController = require("./app/controllers/user.js")(app);
 app.get("/sign", userController.sign);
-app.post("/sign", userController.sign_post);
+app.post("/sign", userController["sign_post"]);
 app.get("/login", userController.login);
-app.post("/login", userController.login_post);
+app.post("/login", userController["login_post"]);
 app.get("/logout", userController.logout);
 app.get("/login/remind_password", userController["remind_password"]);
+app.post("/login/remind_password", userController["remind_password_post"]);
 
 deadlineController = require("./app/controllers/deadline.js")(app);
 app.get("/my_deadlines", deadlineController.deadlines);

@@ -3,13 +3,12 @@ var flash = require('connect-flash'),
     crypto = require("crypto"),
     querystring = require('querystring'),
     passport = require("passport"),
-    mailer = require('express-mailer'),
+    nodemailer = require("nodemailer"),
     LocalStrategy = require('passport-local').Strategy,
     userController;
 
 userController = function (app) {
     var db = app.get('db'), templates = app.get('templates'), actions = {};
-
 
     /**
      * This action renders sign up form
@@ -111,11 +110,49 @@ userController = function (app) {
         res.send(html);
     };
 
+    actions.remind_password_post = function (req, res) {
+        var smtpTransport, mail,
+            email = req.body.email,
+            text = templates.email.remind_password({}),
+            conf = app.get("conf");
+
+        smtpTransport = nodemailer.createTransport("SMTP", {
+            host: conf.mail.smtp.host,
+            port: conf.mail.smtp.port,
+            secureConnection: conf.mail.smtp.secureConnection,
+            auth: {
+                user: conf.mail.smtp.user,
+                pass: conf.mail.smtp.pass
+            }
+        });
+        mail = {
+            from: "D247 <no-reply@d247.org>", // sender address
+            to: email, // list of receivers
+            subject: "New password", // Subject line
+            text: text// plaintext body
+        };
+
+
+        smtpTransport.sendMail(mail, function (error, response) {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log("Message sent: " + response.message);
+            }
+
+
+            // if you don't want to use this transport object anymore, uncomment following line
+            smtpTransport.close(); // shut down the connection pool, no more messages
+            res.end("Email was sent");
+
+        });
+    };
     actions.logout = function (req, res) {
         req.session.destroy(function () {
             res.redirect('/login');
         });
     };
+
 
     return actions;
 };
