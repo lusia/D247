@@ -5,8 +5,9 @@ var flash = require('connect-flash'),
     passport = require("passport"),
     nodemailer = require("nodemailer"),
     LocalStrategy = require('passport-local').Strategy,
-    userController;
+    userController, hashPassword;
 
+hashPassword = require("./../utils/hashPassword");
 userController = function (app) {
     var db = app.get('db'), templates = app.get('templates'), actions = {};
 
@@ -70,7 +71,7 @@ userController = function (app) {
 
                     req.body.username = email;
                     passport.authenticate('local')(req, res, function () {
-                        res.redirect('/my_deadlines');
+                        res.redirect('/');
                     });
                 }
 
@@ -113,38 +114,65 @@ userController = function (app) {
     actions.remind_password_post = function (req, res) {
         var smtpTransport, mail,
             email = req.body.email,
-            text = templates.email.remind_password({}),
-            conf = app.get("conf");
+            conf = app.get("conf"), new_password,
+            text, hashed_password, str, new_salt;
 
-        smtpTransport = nodemailer.createTransport("SMTP", {
-            host: conf.mail.smtp.host,
-            port: conf.mail.smtp.port,
-            secureConnection: conf.mail.smtp.secureConnection,
-            auth: {
-                user: conf.mail.smtp.user,
-                pass: conf.mail.smtp.pass
+        db.collection("users").findOne({email: email}, function (err, doc) {
+            if (err) {
+                throw err;
             }
-        });
-        mail = {
-            from: "D247 <no-reply@d247.org>", // sender address
-            to: email, // list of receivers
-            subject: "New password", // Subject line
-            text: text// plaintext body
-        };
+
+            if (doc !== null) {
+
+                //Creating new password and salt for user
+                str = (Math.random() * 1000).toString();
+                new_password = crypto.createHash("md5").update(str).digest("hex").slice(0, 10);
+                new_salt = new Date().getMilliseconds().toString();
+                text = templates.email.remind_password({password: new_password});
+
+                //Updating hash password and salt in db
+                hashed_password = hashPassword(new_password, new_salt);
+
+                db.collection("users").update({email: email}, {$set: {password: hashed_password, salt: new_salt}}, function (err, upd) {
+                    if (err) {
+                        throw err;
+                    }
 
 
-        smtpTransport.sendMail(mail, function (error, response) {
-            if (error) {
-                console.log(error);
+                });
+
+                // configuration for sending email
+                smtpTransport = nodemailer.createTransport("SMTP", {
+                    host: conf.mail.smtp.host,
+                    port: conf.mail.smtp.port,
+                    secureConnection: conf.mail.smtp.secureConnection,
+                    auth: {
+                        user: conf.mail.smtp.user,
+                        pass: conf.mail.smtp.pass
+                    }
+                });
+                mail = {
+                    from: "D247 <no-reply@d247.org>", // sender address
+                    to: email, // list of receivers
+                    subject: "New password", // Subject line
+                    text: text// plaintext body
+                };
+
+
+                smtpTransport.sendMail(mail, function (error, response) {
+                    if (error) {
+                        console.log(error);
+                    } else {
+                        console.log("Message sent: " + response.message);
+                    }
+
+                    smtpTransport.close(); // shut down the connection pool, no more messages
+                    res.end("Email was sent");
+
+                });
             } else {
-                console.log("Message sent: " + response.message);
+                res.send("you are not here");
             }
-
-
-            // if you don't want to use this transport object anymore, uncomment following line
-            smtpTransport.close(); // shut down the connection pool, no more messages
-            res.end("Email was sent");
-
         });
     };
     actions.logout = function (req, res) {

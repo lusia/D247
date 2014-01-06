@@ -80,7 +80,7 @@ passport.use(new LocalStrategy(
             } else {
                 salt = user.salt;
                 password = password + salt;
-                hashedPassword = crypto.createHash("md5").update(password).digest("hex")
+                hashedPassword = crypto.createHash("md5").update(password).digest("hex");
                 if (hashedPassword === user.password) {
                     return done(null, user);
                 } else {
@@ -112,10 +112,10 @@ passport.deserializeUser(function (id, done) {
     });
 });
 
-mainController = require('./app/controllers/main.js')(app);
+mainController = require('./app/controllers/main')(app);
 app.get("/", mainController.main);
 
-userController = require("./app/controllers/user.js")(app);
+userController = require("./app/controllers/user")(app);
 app.get("/sign", userController.sign);
 app.post("/sign", userController["sign_post"]);
 app.get("/login", userController.login);
@@ -135,6 +135,7 @@ app.get("/about", aboutController.about);
 
 oneDeadlineController = require('./app/controllers/one_deadline.js')(app);
 app.get("/deadline/:id", oneDeadlineController["deadline_post"]);
+
 
 mongoclient.open(function (err, mongoclient) {
     app.listen(8080);
