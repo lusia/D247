@@ -29,6 +29,9 @@ require('handlebars-layouts')(handlebars);
 require('js-yaml'); //automatically register support for yaml files
 conf = require('./app/config/' + NODE_ENV + '.yaml'); //load config file
 
+app.set("conf", conf);
+
+
 app.set('app_dir', __dirname);
 app.set('handlebars', handlebars);
 require('./app/handlebars/partials.js')(app);
@@ -49,7 +52,8 @@ app.use(express.session({
         db: conf.session.redis.db,
         pass: conf.session.redis.pass
     }),
-    secret: conf.session.redis.secret }));
+    secret: conf.session.redis.secret
+}));
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
@@ -75,7 +79,7 @@ passport.use(new LocalStrategy(
             } else {
                 salt = user.salt;
                 password = password + salt;
-                hashedPassword = crypto.createHash("md5").update(password).digest("hex")
+                hashedPassword = crypto.createHash("md5").update(password).digest("hex");
                 if (hashedPassword === user.password) {
                     return done(null, user);
                 } else {
@@ -107,15 +111,17 @@ passport.deserializeUser(function (id, done) {
     });
 });
 
-mainController = require('./app/controllers/main.js')(app);
+mainController = require('./app/controllers/main')(app);
 app.get("/", mainController.main);
 
-userController = require("./app/controllers/user.js")(app);
+userController = require("./app/controllers/user")(app);
 app.get("/sign", userController.sign);
-app.post("/sign", userController.sign_post);
+app.post("/sign", userController["sign_post"]);
 app.get("/login", userController.login);
-app.post("/login", userController.login_post);
+app.post("/login", userController["login_post"]);
 app.get("/logout", userController.logout);
+app.get("/login/remind_password", userController["remind_password"]);
+app.post("/login/remind_password", userController["remind_password_post"]);
 
 deadlineController = require("./app/controllers/deadline.js")(app);
 app.get("/my_deadlines", deadlineController.deadlines);
@@ -128,6 +134,7 @@ app.post("/deadlines/vote", deadlineController["vote_post"]);
 
 aboutController = require('./app/controllers/about.js')(app);
 app.get("/about", aboutController.about);
+
 
 mongoclient.open(function (err, mongoclient) {
     app.listen(8080);

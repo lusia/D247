@@ -13,3 +13,11 @@ db:
     user:
     pass:
     name:
+
+mail:
+    smtp:
+        user:
+        pass:
+        host:
+        secureConnection:
+        port:

@@ -1,0 +1,41 @@
+{{#extend "layout"}}
+    {{#replace "content"}}
+        <header class="header bg-white b-b">
+            <p>Information</p>
+        </header>
+        <div class="row">
+            <div class="col-sm-6">
+                <section class="panel">
+                    <header class="panel-heading bg bg-success text-center">&nbsp;
+                    </header>
+                    <div class="panel-body">
+
+                        <article class="media">
+                            <div class="media-body"><a href="#" class="h4">Dear {{#if email}}{{email}}{{else}}
+                                user{{/if}}</a>
+                                <br>
+                                <br>
+
+                                <p class="info_description">
+                                    {{#if email}}
+                                        Email was just sent to you, now you can go to <a href="/login">Log In</a> page
+                                        and log in with your new password.
+                                    {{else}}
+                                        You don't have an account here. Please, go to the <a href="/sign">Sign Up</a>
+                                        page and create one.
+                                    {{/if}}
+                                </p>
+                            </div>
+                        </article>
+
+                        <h4>
+                        </h4>
+                    </div>
+                </section>
+            </div>
+        </div>
+    {{/replace}}
+{{/extend}}
+
+
+

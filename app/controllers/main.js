@@ -29,6 +29,7 @@ var _ = require('underscore'),
                             html = templates.main({deadlines: collection,
                                 active: "main",
                                 user: req.user,
+                                text: "Home",
                                 user_votes: _.pluck(user_votes, 'id_deadline') //create array with ids of deadline voted by user
                             });
                             res.send(html);
