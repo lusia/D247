@@ -167,7 +167,6 @@ userController = function (app) {
                     }
 
                     smtpTransport.close(); // shut down the connection pool, no more messages
-
                     html = templates.info["email_sending_information"]({email: email});
                     res.send(html);
 

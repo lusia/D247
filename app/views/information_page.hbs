@@ -11,18 +11,18 @@
                     <div class="panel-body">
 
                         <article class="media">
-                            <div class="media-body"><a href="#" class="h4">Dear {{#if emai}}{{email}}{{else}}
-                                user{{/if}}.</a>
+                            <div class="media-body"><a href="#" class="h4">Dear {{#if email}}{{email}}{{else}}
+                                user{{/if}}</a>
                                 <br>
                                 <br>
 
                                 <p class="info_description">
-                                    {{#if emai}}
+                                    {{#if email}}
                                         Email was just sent to you, now you can go to <a href="/login">Log In</a> page
                                         and log in with your new password.
                                     {{else}}
                                         You don't have an account here. Please, go to the <a href="/sign">Sign Up</a>
-                                        page first.
+                                        page and create one.
                                     {{/if}}
                                 </p>
                             </div>
