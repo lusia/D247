@@ -18,7 +18,7 @@ var express = require("express"),
     userController,
     deadlineController,
     aboutController,
-    oneDeadlineController,
+    voteController,
     expressValidator = require('express-validator'),
     RedisStore = require('connect-redis')(express),
     NODE_ENV = process.env.PASSENGER_ENV || 'dev',
@@ -27,7 +27,7 @@ var express = require("express"),
 
 require('handlebars-layouts')(handlebars);
 require('js-yaml'); //automatically register support for yaml files
-conf = require('./app/config/' + NODE_ENV + '.yaml');
+conf = require('./app/config/' + NODE_ENV + '.yaml'); //load config file
 
 app.set('app_dir', __dirname);
 app.set('handlebars', handlebars);
@@ -41,7 +41,6 @@ app.use('/static', express.static(__dirname + '/static'));
 
 app.use(express.cookieParser());
 app.use(express.bodyParser());
-//app.use(express.logger());
 app.use(expressValidator());
 app.use(express.session({
     store: new RedisStore({
@@ -59,7 +58,7 @@ app.use(app.router);
 var mongoclient = new MongoClient(new Server(conf.db.host, conf.db.port, {"native_parser": true}));
 var db = mongoclient.db(conf.db.name);
 
-app.set('templates', require('./app/handlebars/templates.js').compileTemplates(app));
+app.set('templates', require('./app/handlebars/templates.js').compileTemplates(app)); //precompile templates and save them
 app.set('db', db);
 
 /**
@@ -120,15 +119,15 @@ app.get("/logout", userController.logout);
 
 deadlineController = require("./app/controllers/deadline.js")(app);
 app.get("/my_deadlines", deadlineController.deadlines);
-app.get("/add_new_deadline", deadlineController["add_new"]);
-app.post("/add_new_deadline", deadlineController["add_new_post"]);
+app.get("/add_new_deadline", deadlineController["add_new__get"]);
+app.post("/add_new_deadline", deadlineController["add_new__post"]);
+app.get("/deadline/:id", deadlineController["display_one"]);
+
+voteController = require("./app/controllers/vote.js")(app);
 app.post("/deadlines/vote", deadlineController["vote_post"]);
 
 aboutController = require('./app/controllers/about.js')(app);
 app.get("/about", aboutController.about);
-
-oneDeadlineController = require('./app/controllers/one_deadline.js')(app);
-app.get("/deadline/:id", oneDeadlineController["deadline_post"]);
 
 mongoclient.open(function (err, mongoclient) {
     app.listen(8080);
