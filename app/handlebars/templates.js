@@ -29,6 +29,10 @@ compileTemplates = function (app) {
         remind_password: handlebars.compile(fs.readFileSync(fFindPath('/app/views/email.hbs'), 'utf8'))
     };
 
+    templates.info = {
+        email_sending_information: handlebars.compile(fs.readFileSync(fFindPath('/app/views/information_page.hbs'), 'utf8'))
+    };
+
     templates.deadline = {
         'new': handlebars.compile(fs.readFileSync(fFindPath('/app/views/add_form.hbs'), 'utf8')),
         list_belongs_to_user: handlebars.compile(fs.readFileSync(fFindPath('/app/views/deadlines_list.hbs'), 'utf8')),

@@ -54,3 +54,12 @@ a.link_to_my_page {
 a.link_to_my_page:hover {
     color: #fb6b5b;
 }
+
+.info_description a {
+    color: #695ea5;
+    font-weight: bold;
+}
+
+.info_description a:hover {
+    color: #fb6b5b;
+}

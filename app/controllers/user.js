@@ -115,7 +115,7 @@ userController = function (app) {
         var smtpTransport, mail,
             email = req.body.email,
             conf = app.get("conf"), new_password,
-            text, hashed_password, str, new_salt;
+            text, hashed_password, str, new_salt, html, email_sending_information;
 
         db.collection("users").findOne({email: email}, function (err, doc) {
             if (err) {
@@ -167,11 +167,15 @@ userController = function (app) {
                     }
 
                     smtpTransport.close(); // shut down the connection pool, no more messages
-                    res.end("Email was sent");
+
+                    html = templates.info["email_sending_information"]({email: email});
+                    res.send(html);
 
                 });
             } else {
-                res.send("you are not here");
+                html = templates.info["email_sending_information"]({});
+                res.send(html);
+
             }
         });
     };
