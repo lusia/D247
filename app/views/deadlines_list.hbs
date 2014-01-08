@@ -7,7 +7,13 @@
             <div class="tab-content">
                 <div class="row">
                     {{#unless deadlines.length}}
-                        <h3>There are no deadlines yet.</h3>
+                        <header class="panel-heading bg bg-success text-center">&nbsp;</header>
+                    <div class="panel-body">
+                    <article class="media">
+                        <div class="media-body">
+                            <p class="info_description explain_description">Hello, here are no deadlines yet, so you
+                                can add your first deadline <a href="/my_deadlines">HERE</a></p>
+                        </div>
                     {{/unless}}
                     {{#each deadlines}}
                         <div class="col-lg-9">
@@ -73,7 +79,7 @@
                         </div>
                     {{/each}}
                 </div>
-            </div>
+                </div>
         </section>
     {{/replace}}
 {{/extend}}
