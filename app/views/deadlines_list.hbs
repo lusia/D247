@@ -8,11 +8,15 @@
                 <div class="row">
                     {{#unless deadlines.length}}
                         <header class="panel-heading bg bg-success text-center">&nbsp;</header>
-                    <div class="panel-body">
-                    <article class="media">
-                        <div class="media-body">
-                            <p class="info_description explain_description">Hello, here are no deadlines yet, so you
-                                can add your first deadline <a href="/my_deadlines">HERE</a></p>
+                        <div class="panel-body">
+                            <article class="media">
+                                <div class="media-body">
+                                    <p class="info_description explain_description">Hello, here are no deadlines yet, so
+                                        you
+                                        can add your first deadline <a href="/my_deadlines">HERE</a>
+                                    </p>
+                                </div>
+                            </article>
                         </div>
                     {{/unless}}
                     {{#each deadlines}}
@@ -79,7 +83,7 @@
                         </div>
                     {{/each}}
                 </div>
-                </div>
+            </div>
         </section>
     {{/replace}}
 {{/extend}}

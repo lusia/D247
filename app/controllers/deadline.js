@@ -159,6 +159,12 @@ var deadlineController = function (app) {
 
     };
 
+
+    actions.statistics = function (req, res) {
+        var html = templates.deadline.statistics({user: req.user, active: "statistics"});
+        res.send(html);
+    };
+
     return actions;
 }
 
