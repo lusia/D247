@@ -1,0 +1,24 @@
+{
+  "name": "deadline",
+  "version": "0.5.0",
+  "authors": [
+    "lusia"
+  ],
+  "license": "MIT",
+  "homepage": "d247.org",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "1.10.2",
+    "bootstrap": "~3.0.3",
+    "bootstrap-form-helpers": "~2.3.0",
+    "momentjs": "~2.5.0",
+    "font-awesome": "~4.0.3"
+  }
+}

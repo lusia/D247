@@ -12,7 +12,6 @@ var express = require("express"),
     Server = require("mongodb").Server,
     S = require('string'),
     fs = require("fs"),
-    mailer = require('express-mailer'),
     moment = require('moment'),
     mainController,
     userController,
@@ -41,6 +40,7 @@ app.use(express.responseTime());
 app.engine("hbs", hbs.__express);
 app.set("view engine", "html");
 app.use('/static', express.static(__dirname + '/static'));
+app.use('/bower_components', express.static(__dirname + '/bower_components'));
 
 app.use(express.cookieParser());
 app.use(express.bodyParser());
