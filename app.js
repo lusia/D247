@@ -12,7 +12,6 @@ var express = require("express"),
     Server = require("mongodb").Server,
     S = require('string'),
     fs = require("fs"),
-    mailer = require('express-mailer'),
     moment = require('moment'),
     mainController,
     userController,
@@ -137,7 +136,7 @@ app.get("/about", aboutController.about);
 
 
 mongoclient.open(function (err, mongoclient) {
-    app.listen(8080);
-    console.log("Express server started on port 8080 at " + (new Date()));
+    app.listen(8090);
+    console.log("Express server started on port 8090 at " + (new Date()));
 });
 
