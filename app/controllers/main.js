@@ -26,6 +26,7 @@ var _ = require('underscore'),
                             if (err) {
                                 throw err;
                             }
+
                             html = templates.main({deadlines: collection,
                                 active: "main",
                                 user: req.user,

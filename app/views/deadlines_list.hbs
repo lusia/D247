@@ -16,7 +16,7 @@
                         </div>
                     {{/unless}}
                     {{#each deadlines}}
-                        <div class="col-lg-9">
+                        <div class="deadline-id col-lg-9" data-deadlineId='{{_id}}'>
                             <section class="panel no-borders hbox">
                                 <aside>
                                     <div class="panel-body">
@@ -52,8 +52,7 @@
                                                 </div>
                                                 <div class="progress progress-sm progress-striped active result">
                                                     <div class="progress-bar progress-bar-success js-progress_bar"
-                                                         data-toggle="tooltip"
-                                                         data-daedlineId='{{_id}}'></div>
+                                                         data-toggle="tooltip"></div>
                                                 </div>
                                             </div>
 
