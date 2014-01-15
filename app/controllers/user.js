@@ -66,8 +66,7 @@ userController = function (app) {
             db.collection("users").insert(users, function (err, ins) {
                 if (err) {
                     throw err;
-                }
-                else {
+                } else {
 
                     req.body.username = email;
                     passport.authenticate('local')(req, res, function () {
@@ -178,6 +177,12 @@ userController = function (app) {
             }
         });
     };
+
+    actions.change_password = function (req, res) {
+        var html = templates.user.change_password({user: req.user});
+        res.send(html);
+    };
+
     actions.logout = function (req, res) {
         req.session.destroy(function () {
             res.redirect('/login');

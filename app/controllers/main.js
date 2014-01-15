@@ -13,6 +13,7 @@ var _ = require('underscore'),
             db.collection("deadlines").find({"status": "public", "date": {$gt: new Date().getTime()}})
                 .toArray(function (err, collection) {
                     var html;
+
                     if (err) {
                         throw err;
                     }

@@ -2,6 +2,17 @@
     {{#replace "content"}}
         <header class="header bg-white b-b">
             <p>{{text}}</p>
+            {{# if user}}
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown"><a href="/my_deadlines"> <span
+                            class="thumb-sm avatar pull-left m-t-n-xs m-r-xs">{{{gravatar user.email}}}</span>
+                        Welcome {{user.name}}</a>
+
+                    </li>
+                    <li><a href="/login/change_password">Change password</a></li>
+                    <li><a href="/logout">Log Out</a></li>
+                </ul>
+            {{/if}}
         </header>
         <section class="scrollable wrapper">
             <div class="tab-content">
@@ -12,7 +23,7 @@
                     <article class="media">
                         <div class="media-body">
                             <p class="info_description explain_description">Hello, here are no deadlines yet, so you
-                                can add your first deadline <a href="/my_deadlines">HERE</a></p>
+                                can add your first deadline <a href="/add_new_deadline">HERE</a></p>
                         </div>
                     {{/unless}}
                     {{#each deadlines}}

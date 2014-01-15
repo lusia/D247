@@ -20,7 +20,8 @@ compileTemplates = function (app) {
     templates.user = {
         login: handlebars.compile(fs.readFileSync(fFindPath('/app/views/login.hbs'), 'utf8')),
         sign: handlebars.compile(fs.readFileSync(fFindPath('/app/views/sign.hbs'), 'utf8')),
-        remind_password: handlebars.compile(fs.readFileSync(fFindPath('/app/views/remind_password.hbs'), 'utf8'))
+        remind_password: handlebars.compile(fs.readFileSync(fFindPath('/app/views/remind_password.hbs'), 'utf8')),
+        change_password: handlebars.compile(fs.readFileSync(fFindPath('/app/views/change_password.hbs'), 'utf8'))
     };
 
     templates.email = {
