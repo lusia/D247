@@ -14,7 +14,7 @@ $(function () {
 
         $container = $button.parent('div');
 
-        deadline_id = $container.parents("deadline-id").attr("data-deadlineId");
+        deadline_id = $container.parents(".js-deadline").attr("data-deadlineId");
         vote = $button.attr("data-vote");
         user_data = {"id": deadline_id, "vote": vote};
         $container.find('.btn:lt(2)').remove();
