@@ -123,6 +123,7 @@ app.get("/logout", userController.logout);
 app.get("/login/remind_password", userController["remind_password"]);
 app.post("/login/remind_password", userController["remind_password_post"]);
 app.get("/login/change_password", userController["change_password"]);
+app.post("/login/change_password", userController["change_password_post"]);
 
 deadlineController = require("./app/controllers/deadline.js")(app);
 app.get("/my_deadlines", deadlineController.deadlines);

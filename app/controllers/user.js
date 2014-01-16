@@ -5,7 +5,8 @@ var flash = require('connect-flash'),
     passport = require("passport"),
     nodemailer = require("nodemailer"),
     LocalStrategy = require('passport-local').Strategy,
-    userController, hashPassword;
+    userController,
+    hashPassword;
 
 hashPassword = require("./../utils/hashPassword");
 userController = function (app) {
@@ -138,8 +139,6 @@ userController = function (app) {
                     if (err) {
                         throw err;
                     }
-
-
                 });
 
                 // configuration for sending email
@@ -180,12 +179,58 @@ userController = function (app) {
         });
     };
 
+    /**
+     * Action renders change password form
+     * @param req
+     * @param res
+     */
     actions.change_password = function (req, res) {
         var html, data = req.flash('data').pop() || {};
         data.req = req;
-        html = templates.user.change_password({user_email: req.user.email, user_name: req.user.name});
+        html = templates.user.change_password({data: data, user_email: req.user.email, user_name: req.user.name});
 
         res.send(html);
+    };
+
+    /**
+     * This action creating new password for user and replacing the old one
+     * @param req
+     * @param res
+     */
+    actions.change_password_post = function (req, res) {
+        var html, password = req.body.password,
+            new_password = req.body.new_password,
+            salt, new_salt, pass, hashed_password, text;
+
+        db.collection("users").findOne({email: req.user.email}, function (err, doc) {
+            if (err) {
+                throw err;
+            }
+
+            salt = doc.salt;
+            pass = hashPassword(password, salt);
+
+            //checking if password enter by user is the same which is in the db
+            if (doc.password === pass) {
+                console.log(doc.password, pass);
+                new_salt = new Date().getMilliseconds().toString();
+                hashed_password = hashPassword(new_password, new_salt);
+                text = templates.email.remind_password({password: hashed_password});
+
+                //Update password in the db
+                db.collection("users").update({email: req.user.email}, {$set: {password: hashed_password, salt: new_salt}}, function (err, upd) {
+                    if (err) {
+                        throw err;
+                    }
+                });
+
+                res.redirect("/my_deadlines");
+            } else {
+                res.send("pass doesn't match");
+            }
+
+        });
+
     };
 
     actions.logout = function (req, res) {
