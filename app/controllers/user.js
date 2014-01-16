@@ -19,7 +19,9 @@ userController = function (app) {
     actions.sign = function (req, res) {
 
         var html, data = req.flash('data').pop() || {};
+
         data.active = "sign";
+
         data.req = req;
         html = templates.user.sign(data);
         res.send(html);
@@ -179,7 +181,10 @@ userController = function (app) {
     };
 
     actions.change_password = function (req, res) {
-        var html = templates.user.change_password({user: req.user});
+        var html, data = req.flash('data').pop() || {};
+        data.req = req;
+        html = templates.user.change_password({user_email: req.user.email, user_name: req.user.name});
+
         res.send(html);
     };
 
