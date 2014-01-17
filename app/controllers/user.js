@@ -40,9 +40,7 @@ userController = function (app) {
             name = S(req.body.name).trim().s,
             password = req.body.password,
             confirm_password = req.body.confirm_password,
-            errors;
-
-        var hashEmail = crypto.createHash('md5').update(email).digest("hex");
+            errors, hashEmail = crypto.createHash('md5').update(email).digest("hex");
 
         name = S(name).capitalize().s;
 
@@ -141,7 +139,7 @@ userController = function (app) {
                     }
                 });
 
-                // configuration for sending email
+                // Configuration for sending email
                 smtpTransport = nodemailer.createTransport("SMTP", {
                     host: conf.mail.smtp.host,
                     port: conf.mail.smtp.port,
@@ -157,7 +155,6 @@ userController = function (app) {
                     subject: "New password", // Subject line
                     text: text// plaintext body
                 };
-
 
                 smtpTransport.sendMail(mail, function (error, response) {
                     if (error) {
@@ -207,12 +204,10 @@ userController = function (app) {
                 throw err;
             }
 
-            salt = doc.salt;
-            pass = hashPassword(password, salt);
+            pass = hashPassword(password, doc.salt);
 
             //checking if password enter by user is the same which is in the db
             if (doc.password === pass) {
-                console.log(doc.password, pass);
                 new_salt = new Date().getMilliseconds().toString();
                 hashed_password = hashPassword(new_password, new_salt);
                 text = templates.email.remind_password({password: hashed_password});
