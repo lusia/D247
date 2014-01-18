@@ -214,7 +214,7 @@ var deadlineController = function (app) {
     };
 
     actions.statistics.step4 = function (req, res, next) {
-        db.collection("deadlines").find({"date": {$gt: new Date().getTime()}}).toArray(function (err, finished) {
+        db.collection("deadlines").find({"date": {$lte: new Date().getTime()}}).toArray(function (err, finished) {
             if (err) {
                 throw err;
             }
@@ -226,7 +226,7 @@ var deadlineController = function (app) {
     };
 
     actions.statistics.step5 = function (req, res) {
-        db.collection("deadlines").find({"date": {$lt: new Date().getTime()}}).toArray(function (err, not_finished) {
+        db.collection("deadlines").find({"date": {$gt: new Date().getTime()}}).toArray(function (err, not_finished) {
             if (err) {
                 throw err;
             }
