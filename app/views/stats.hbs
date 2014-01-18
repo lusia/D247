@@ -10,56 +10,48 @@
                     </header>
                     <div class="panel-body">
 
-                        <table class="table table-striped m-b-none text-sm">
+                        <table class="table table-striped m-b-none text-sm statistics">
                             <tbody>
+                            <tr>
+                                <th>Name</th>
+                                <th>Amount</th>
+                                <th>%</th>
 
+                            </tr>
                             <tr>
                                 <td>All deadlines</td>
-                                <td>
-                                </td>
-                                <td>sdsadsad</td>
+                                <td>{{stats.all}}</td>
+                                <td>100%</td>
 
                             </tr>
                             <tr>
                                 <td>Public</td>
                                 <td>
-                                    <div class="progress progress-sm progress-striped">
-                                        <div class="progress-bar progress-bar-success" data-toggle="tooltip"
-                                             data-original-title="80%" style="width: 80%"></div>
-                                    </div>
+                                    {{stats.pub}}
                                 </td>
-                                <td>sdsadsad</td>
+                                <td>{{{calculatePercentage stats.all stats.pub}}}</td>
 
                             </tr>
                             <tr>
                                 <td>Private</td>
                                 <td>
-                                    <div class="progress progress-sm progress-striped">
-                                        <div class="progress-bar progress-bar-success" data-toggle="tooltip"
-                                             data-original-title="40%" style="width: 40%"></div>
-                                    </div>
+                                    {{stats.priv}}
                                 </td>
-                                <td>sdsadsad</td>
+                                <td>{{{calculatePercentage stats.all stats.priv}}}</td>
                             </tr>
                             <tr>
                                 <td>Finished</td>
                                 <td>
-                                    <div class="progress progress-sm progress-striped">
-                                        <div class="progress-bar progress-bar-success" data-toggle="tooltip"
-                                             data-original-title="20%" style="width: 20%"></div>
-                                    </div>
+                                    {{stats.finished}}
                                 </td>
-                                <td>sdsadsad</td>
+                                <td>{{{calculatePercentage stats.all stats.finished}}}</td>
                             </tr>
                             <tr>
                                 <td>In progress</td>
                                 <td>
-                                    <div class="progress progress-sm progress-striped">
-                                        <div class="progress-bar progress-bar-success" data-toggle="tooltip"
-                                             data-original-title="15%" style="width: 15%"></div>
-                                    </div>
+                                    {{stats.not_finished}}
                                 </td>
-                                <td>sdsadsad</td>
+                                <td>{{{calculatePercentage stats.all stats.not_finished}}}</td>
                             </tr>
                             </tbody>
                         </table>

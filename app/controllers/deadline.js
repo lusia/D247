@@ -160,10 +160,84 @@ var deadlineController = function (app) {
     };
 
 
-    actions.statistics = function (req, res) {
-        var html = templates.deadline.statistics({user: req.user, active: "statistics"});
-        res.send(html);
+    /**
+     *
+     * @type {{}}
+     */
+    actions.statistics = {};
+
+    /**
+     * These actions finding specific documents in deadlines collection
+     * @param req
+     * @param res
+     * @param next
+     */
+    actions.statistics.step1 = function (req, res, next) {
+        db.collection("deadlines").find({}).toArray(function (err, all) {
+            if (err) {
+                throw err;
+            }
+            req.stats = {all: all.length};
+
+
+            next();
+        });
+
     };
+    actions.statistics.step2 = function (req, res, next) {
+
+        db.collection("deadlines").find({"status": "public"}).toArray(function (err, pub) {
+            if (err) {
+                throw err;
+            }
+
+            var pub_status = pub.length;
+
+            req.stats.pub = pub_status;
+
+            next();
+        });
+    };
+
+    actions.statistics.step3 = function (req, res, next) {
+        db.collection("deadlines").find({"status": "private"}).toArray(function (err, priv) {
+            if (err) {
+                throw err;
+            }
+            var priv_status = priv.length;
+            req.stats.priv = priv_status;
+            next();
+
+        });
+
+
+    };
+
+    actions.statistics.step4 = function (req, res, next) {
+        db.collection("deadlines").find({"date": {$gt: new Date().getTime()}}).toArray(function (err, finished) {
+            if (err) {
+                throw err;
+            }
+            var finished_deadline = finished.length;
+            req.stats.finished = finished_deadline;
+            next();
+        });
+
+    };
+
+    actions.statistics.step5 = function (req, res) {
+        db.collection("deadlines").find({"date": {$lt: new Date().getTime()}}).toArray(function (err, not_finished) {
+            if (err) {
+                throw err;
+            }
+            var html, active = not_finished.length;
+            req.stats["not_finished"] = active;
+
+            html = templates.deadline.statistics({user: req.user, stats: req.stats});
+            res.send(html);
+        });
+    };
+
 
     return actions;
 }

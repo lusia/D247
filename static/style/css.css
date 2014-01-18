@@ -63,3 +63,11 @@ a.link_to_my_page:hover {
 .info_description a:hover {
     color: #fb6b5b;
 }
+
+.statistics td {
+    width: 50px;
+}
+table tr.all_deadline {
+    border-bottom: 3px solid #ddd;
+
+}
