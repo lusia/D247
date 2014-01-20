@@ -12,7 +12,6 @@ module.exports = function (app) {
     handlebars.registerHelper('displayFlashErrorsIfExist', function (req) {
         var out = '',
             errs = req.flash('error');
-
         if (errs.length > 0) {
             out = errs.map(function (err) {
                 var msg = '';

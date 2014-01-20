@@ -106,7 +106,7 @@ userController = function (app) {
      * @param res
      */
     actions.remind_password = function (req, res) {
-        var html = templates.user.remind_password({});
+        var html = templates.user.remind_password({text: "Remind password"});
         res.send(html);
     };
 
@@ -179,7 +179,7 @@ userController = function (app) {
     };
 
     actions.change_password = function (req, res) {
-        var html = templates.user.change_password({user: req.user});
+        var html = templates.user.change_password({text:"Change password", user: req.user});
         res.send(html);
     };
 

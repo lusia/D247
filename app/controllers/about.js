@@ -10,7 +10,7 @@ var aboutController = function (app) {
     actions.about = function (req, res) {
         var html;
 
-        html = templates.about({active: "about", user: req.user});
+        html = templates.about({text: "About", active: "about", user: req.user});
         res.send(html);
     };
 

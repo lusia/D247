@@ -30,7 +30,7 @@ var deadlineController = function (app) {
      * @param res
      */
     actions["add_new__get"] = function (req, res) {
-        var html = templates.deadline['new']({active: "add", user: req.user});
+        var html = templates.deadline['new']({text: "Add new deadline", active: "add", user: req.user});
         res.send(html);
     };
 
@@ -153,7 +153,7 @@ var deadlineController = function (app) {
             newDate = new Date(date);
             dateString = newDate.toUTCString();
 
-            html = templates.deadline.one({user: req.user, dateString: dateString, deadline: deadline});
+            html = templates.deadline.one({text: "Deadline", user: req.user, dateString: dateString, deadline: deadline});
             res.send(html);
         });
 
@@ -233,7 +233,7 @@ var deadlineController = function (app) {
             var html, active = not_finished.length;
             req.stats["not_finished"] = active;
 
-            html = templates.deadline.statistics({user: req.user, stats: req.stats});
+            html = templates.deadline.statistics({text: "Statistics", user: req.user, stats: req.stats});
             res.send(html);
         });
     };
