@@ -4,10 +4,9 @@ var flash = require('connect-flash'),
     querystring = require('querystring'),
     passport = require("passport"),
     nodemailer = require("nodemailer"),
-    LocalStrategy = require('passport-local').Strategy,
-    userController, hashPassword;
+    userController,
+    hashPassword = require("./../utils/hashPassword");
 
-hashPassword = require("./../utils/hashPassword");
 userController = function (app) {
     var db = app.get('db'), templates = app.get('templates'), actions = {};
 
@@ -76,6 +75,7 @@ userController = function (app) {
 
             });
         } else {
+
             req.flash('error', errors);
             req.flash('data', req.body);
             res.redirect('/sign');
@@ -179,7 +179,7 @@ userController = function (app) {
     };
 
     actions.change_password = function (req, res) {
-        var html = templates.user.change_password({text:"Change password", user: req.user});
+        var html = templates.user.change_password({text: "Change password", user: req.user});
         res.send(html);
     };
 

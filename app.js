@@ -23,13 +23,11 @@ var express = require("express"),
     NODE_ENV = process.env.PASSENGER_ENV || 'dev',
     conf;
 
-
 require('handlebars-layouts')(handlebars);
 require('js-yaml'); //automatically register support for yaml files
 conf = require('./app/config/' + NODE_ENV + '.yaml'); //load config file
 
 app.set("conf", conf);
-
 
 app.set('app_dir', __dirname);
 app.set('handlebars', handlebars);

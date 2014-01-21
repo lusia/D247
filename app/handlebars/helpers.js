@@ -8,7 +8,6 @@ var _ = require("underscore"),
  */
 module.exports = function (app) {
     var handlebars = app.get('handlebars');
-
     handlebars.registerHelper('displayFlashErrorsIfExist', function (req) {
         var out = '',
             errs = req.flash('error');
