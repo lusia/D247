@@ -75,4 +75,23 @@ module.exports = function (app) {
         return moment(date).format(format);
     });
 
+    /**
+     *
+     */
+    handlebars.registerHelper("infoPassChanged", function (changed, block) {
+        var out = "";
+        if (changed === true) {
+            out = block.fn();
+        }
+        return out;
+    });
+
+    handlebars.registerHelper("infoPassNotTheSame", function (changed, block) {
+        var out = "";
+        if (changed === false) {
+            out = block.fn();
+        }
+        return out;
+    });
+
 };

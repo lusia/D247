@@ -27,19 +27,19 @@
                                 can add your first deadline <a href="/add_new_deadline">HERE</a></p>
                         </div>
                     {{/unless}}
-                    <div class="row dn js-alert_change_password">
-                        <div class="col-lg-9">
-                            <div class="alert alert-success">
-                                <button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i>
-                                </button>
-                                <i class="fa fa-check-sign"></i><strong>Well done!</strong> You successfully change the
-                                password.
+                    {{#infoPassChanged changed}}
+                        <div class="row js-alert_change_password">
+                            <div class="col-lg-9">
+                                <div class="alert alert-success">
+                                    <button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i>
+                                    </button>
+                                    <i class="fa fa-check-sign"></i><strong>Well done!</strong> You successfully changed
+                                    the password.
+                                </div>
                             </div>
                         </div>
-                    </div>
-
+                    {{/infoPassChanged}}
                     {{#each deadlines}}
-
                         <div class="js-deadline col-lg-9" data-deadlineId='{{_id}}'>
                             <section class="panel no-borders hbox">
                                 <aside>

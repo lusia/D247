@@ -4,7 +4,6 @@ var flash = require('connect-flash'),
     querystring = require('querystring'),
     passport = require("passport"),
     nodemailer = require("nodemailer"),
-    LocalStrategy = require('passport-local').Strategy,
     userController,
     hashPassword;
 
@@ -20,7 +19,6 @@ userController = function (app) {
     actions.sign = function (req, res) {
 
         var html, data = req.flash('data').pop() || {};
-
         data.active = "sign";
 
         data.req = req;
@@ -40,7 +38,7 @@ userController = function (app) {
             name = S(req.body.name).trim().s,
             password = req.body.password,
             confirm_password = req.body.confirm_password,
-            errors, hashEmail = crypto.createHash('md5').update(email).digest("hex");
+            errors;
 
         name = S(name).capitalize().s;
 
@@ -197,7 +195,8 @@ userController = function (app) {
     actions.change_password_post = function (req, res) {
         var html, password = req.body.password,
             new_password = req.body.new_password,
-            salt, new_salt, pass, hashed_password, text;
+            confirm_password = req.body.confirm_password,
+            new_salt, pass, hashed_password;
 
         db.collection("users").findOne({email: req.user.email}, function (err, doc) {
             if (err) {
@@ -208,20 +207,29 @@ userController = function (app) {
 
             //checking if password enter by user is the same which is in the db
             if (doc.password === pass) {
-                new_salt = new Date().getMilliseconds().toString();
-                hashed_password = hashPassword(new_password, new_salt);
-                text = templates.email.remind_password({password: hashed_password});
+                if (new_password === confirm_password) {
 
-                //Update password in the db
-                db.collection("users").update({email: req.user.email}, {$set: {password: hashed_password, salt: new_salt}}, function (err, upd) {
-                    if (err) {
-                        throw err;
-                    }
-                });
+                    new_salt = new Date().getMilliseconds().toString();
+                    hashed_password = hashPassword(new_password, new_salt);
 
-                res.redirect("/my_deadlines");
+                    //Update password in the db
+                    db.collection("users").update({email: req.user.email}, {$set: {password: hashed_password, salt: new_salt}}, function (err, upd) {
+                        if (err) {
+                            throw err;
+                        }
+                    });
+
+                    html = templates.deadline.list_belongs_to_user({user: req.user, changed: true});
+                    res.send(html);
+                } else {
+                    html = templates.user.change_password({text: "Change password", user: req.user, changed: false});
+                    res.send(html);
+                }
+
             } else {
-                res.send("pass doesn't match");
+
+                html = templates.user.change_password({text: "Change password", user: req.user, changed: false});
+                res.send(html);
             }
 
         });
