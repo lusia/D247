@@ -20,6 +20,7 @@ userController = function (app) {
         var html, data = req.flash('data').pop() || {};
         data.active = "sign";
         data.req = req;
+        data.text = "Sign Up";
         html = templates.user.sign(data);
         res.send(html);
     };
@@ -89,7 +90,7 @@ userController = function (app) {
      * @param res
      */
     actions.login = function (req, res) {
-        var html = templates.user.login({req: req, active: "login"});
+        var html = templates.user.login({text: "Log In", req: req, active: "login"});
         res.send(html);
     };
 
