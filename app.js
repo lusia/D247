@@ -123,15 +123,15 @@ app.post("/login/remind_password", userController["remind_password_post"]);
 app.get("/login/change_password", userController["change_password"]);
 
 deadlineController = require("./app/controllers/deadline.js")(app);
-app.get("/my_deadlines", deadlineController.deadlines);
-app.get("/add_new_deadline", deadlineController["add_new__get"]);
-app.post("/add_new_deadline", deadlineController["add_new__post"]);
-app.get("/deadline/:id", deadlineController["display_one"]);
+app.get("/my_goals", deadlineController.deadlines);
+app.get("/add_new_goal", deadlineController["add_new__get"]);
+app.post("/add_new_goal", deadlineController["add_new__post"]);
+app.get("/goal/:id", deadlineController["display_one"]);
 app.get("/statistics", deadlineController.statistics.step1, deadlineController.statistics.step2,
     deadlineController.statistics.step3, deadlineController.statistics.step4, deadlineController.statistics.step5);
 
 voteController = require("./app/controllers/vote.js")(app);
-app.post("/deadlines/vote", deadlineController["vote_post"]);
+app.post("/goal/vote", deadlineController["vote_post"]);
 
 aboutController = require('./app/controllers/about.js')(app);
 app.get("/about", aboutController.about);

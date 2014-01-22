@@ -97,7 +97,7 @@ userController = function (app) {
      * checking users authentication
      *
      */
-    actions.login_post = passport.authenticate("local", {successRedirect: '/my_deadlines', failureRedirect: '/login',
+    actions.login_post = passport.authenticate("local", {successRedirect: '/my_goals', failureRedirect: '/login',
         failureFlash: 'Could not authenticate, please try again'});
 
     /**

@@ -20,7 +20,7 @@ $(function () {
         $container.find('.btn:lt(2)').remove();
 
         $.ajax({
-            url: "/deadlines/vote",
+            url: "/goal/vote",
             type: "POST",
             data: user_data,
             dataType: "json",

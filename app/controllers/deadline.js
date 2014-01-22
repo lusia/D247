@@ -19,7 +19,7 @@ var deadlineController = function (app) {
                     throw err;
                 }
 
-                html = templates.deadline["list_belongs_to_user"]({text: "Show my deadlines", deadlines: collection, active: "my_deadlines", user: req.user, user_votes: []});
+                html = templates.deadline["list_belongs_to_user"]({text: "Show my goals", deadlines: collection, active: "my_deadlines", user: req.user, user_votes: []});
                 res.send(html);
             });
     };
@@ -30,7 +30,7 @@ var deadlineController = function (app) {
      * @param res
      */
     actions["add_new__get"] = function (req, res) {
-        var html = templates.deadline['new']({text: "Add new deadline", active: "add", user: req.user});
+        var html = templates.deadline['new']({text: "Add new goal", active: "add", user: req.user});
         res.send(html);
     };
 
@@ -67,7 +67,7 @@ var deadlineController = function (app) {
                 throw err;
             }
 
-            res.redirect("/my_deadlines");
+            res.redirect("/my_goals");
         });
     };
 
@@ -105,12 +105,10 @@ var deadlineController = function (app) {
             });
 
             if (direction === "up") {
-
                 db.collection("deadlines").update({"_id": new ObjectId(id_deadline)}, {$inc: {result: 1, amount: 1}}, function (err, upd) {
                     if (err) {
                         throw err;
                     }
-
 
                     db.collection("deadlines").findOne({"_id": new ObjectId(id_deadline)}, function (err, doc) {
 
@@ -119,9 +117,7 @@ var deadlineController = function (app) {
 
                 });
 
-
             } else {
-
                 db.collection("deadlines").update({"_id": new ObjectId(id_deadline)}, {$inc: {result: -1, amount: 1}}, function (err, upd) {
                     if (err) {
                         throw err;
@@ -153,7 +149,7 @@ var deadlineController = function (app) {
             newDate = new Date(date);
             dateString = newDate.toUTCString();
 
-            html = templates.deadline.one({text: "Deadline", user: req.user, dateString: dateString, deadline: deadline});
+            html = templates.deadline.one({text: "Goal", user: req.user, dateString: dateString, deadline: deadline});
             res.send(html);
         });
 
