@@ -6,6 +6,8 @@ var express = require("express"),
     _ = require("underscore"),
     passport = require("passport"),
     LocalStrategy = require('passport-local').Strategy,
+    GoogleStrategy = require('passport-google-oauth').OAuth2Strategy,
+    User = require('./app/models/User'),
     crypto = require("crypto"),
     MongoClient = require("mongodb").MongoClient,
     ObjectId = require('mongodb').ObjectID,
@@ -88,6 +90,34 @@ passport.use(new LocalStrategy(
     }
 ));
 
+
+passport.use(new GoogleStrategy(conf.google, function (req, accessToken, refreshToken, profile, done, include_granted_scopes) {
+    console.log("here");
+    if (req.user) {
+        console.log(req.user);
+    } else {
+        console.log(profile);
+
+        User.findOne({ google: profile.id }, function(err, existingUser) {
+            if (existingUser) return done(null, existingUser);
+            console.log(existingUser, 'existinguser 2');
+            var user = new User();
+            user.email = profile._json.email;
+            user.google = profile.id;
+            user.tokens.push({ kind: 'google', accessToken: accessToken });
+            user.profile.name = profile.displayName;
+            user.profile.gender = profile._json.gender;
+            user.profile.picture = profile._json.picture;
+            user.save(function(err) {
+                done(err, user);
+                console.log(user, '2');
+            });
+        });
+    }
+}));
+
+
+
 app.use(function (err, req, res, next) {
     fs.writeFile(__dirname + "/log/" + moment().format("YYYY-MM-DD") + ".log", moment().format("HH:mm") + " " +
         err.stack + "\n", {"flag": "a"}, function (err) {
@@ -117,6 +147,8 @@ app.get("/sign", userController.sign);
 app.post("/sign", userController["sign_post"]);
 app.get("/login", userController.login);
 app.post("/login", userController["login_post"]);
+app.get("/auth/google", userController["login_google"]);
+app.get("/oauth2callback", userController["login_google_callback"]);
 app.get("/logout", userController.logout);
 app.get("/login/remind_password", userController["remind_password"]);
 app.post("/login/remind_password", userController["remind_password_post"]);

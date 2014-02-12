@@ -101,6 +101,11 @@ userController = function (app) {
     actions.login_post = passport.authenticate("local", {successRedirect: '/my_goals', failureRedirect: '/login',
         failureFlash: 'Could not authenticate, please try again'});
 
+    actions.login_google = passport.authenticate('google', { scope: 'profile email', approval_prompt: "force", access_type: "offline"});
+
+    actions.login_google_callback = passport.authenticate('google', { successRedirect: '/', failureRedirect: '/login' });
+
+
     /**
      * This action renders remind password form
      * @param req

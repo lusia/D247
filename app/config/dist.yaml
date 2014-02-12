@@ -21,3 +21,9 @@ mail:
         host:
         secureConnection:
         port:
+
+google:
+    clientID:
+    clientSecret:
+    callbackURL:
+    passReqToCallback:
