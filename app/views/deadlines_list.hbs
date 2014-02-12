@@ -17,7 +17,12 @@
         <section class="scrollable wrapper">
             <div class="tab-content">
                 <div class="row">
-
+                    {{# if successful}}
+                        <div class="col-lg-9 alert alert-success">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            {{successful}}
+                        </div>
+                    {{/if}}
                     {{#unless deadlines.length}}
                         <header class="panel-heading bg bg-success text-center">&nbsp;</header>
                     <div class="panel-body">
@@ -25,25 +30,16 @@
                         <div class="media-body">
                             <p class="info_description explain_description">Hello, here are no deadlines yet, so you
                                 can add your first deadline <a href="/add_new_deadline">HERE</a></p>
+
                         </div>
                     {{/unless}}
-                    {{#infoPassChanged changed}}
-                        <div class="row js-alert_change_password">
-                            <div class="col-lg-9">
-                                <div class="alert alert-success">
-                                    <button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i>
-                                    </button>
-                                    <i class="fa fa-check-sign"></i><strong>Well done!</strong> You successfully changed
-                                    the password.
-                                </div>
-                            </div>
-                        </div>
-                    {{/infoPassChanged}}
+
                     {{#each deadlines}}
                         <div class="js-deadline col-lg-9" data-deadlineId='{{_id}}'>
                             <section class="panel no-borders hbox">
                                 <aside>
                                     <div class="panel-body">
+
                                         <div class="pos-rlt col-lg-4">
 
                                             {{{gravatar user_email}}}

@@ -21,7 +21,7 @@ module.exports = function (app) {
                 } else {
                     msg = err;
                 }
-                return '<li class="alert alert-danger">' + msg + '</li>';
+                return '<li class="alert_fail alert alert-danger">' + msg + '</li>';
             }).join('');
 
             out = '<ul>' + out + '</ul>';
@@ -75,23 +75,5 @@ module.exports = function (app) {
         return moment(date).format(format);
     });
 
-    /**
-     *
-     */
-    handlebars.registerHelper("infoPassChanged", function (changed, block) {
-        var out = "";
-        if (changed === true) {
-            out = block.fn();
-        }
-        return out;
-    });
-
-    handlebars.registerHelper("infoPassNotTheSame", function (changed, block) {
-        var out = "";
-        if (changed === false) {
-            out = block.fn();
-        }
-        return out;
-    });
 
 };

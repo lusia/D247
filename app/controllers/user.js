@@ -182,7 +182,7 @@ userController = function (app) {
     actions.change_password = function (req, res) {
         var html, data = req.flash('data').pop() || {};
         data.req = req;
-        html = templates.user.change_password({data: data, user_email: req.user.email, user_name: req.user.name});
+        html = templates.user.change_password({user: req.user, data: data, user_email: req.user.email, user_name: req.user.name});
 
         res.send(html);
     };
@@ -198,41 +198,47 @@ userController = function (app) {
             confirm_password = req.body.confirm_password,
             new_salt, pass, hashed_password;
 
+
         db.collection("users").findOne({email: req.user.email}, function (err, doc) {
-            if (err) {
-                throw err;
-            }
+                if (err) {
+                    throw err;
+                }
 
-            pass = hashPassword(password, doc.salt);
+                pass = hashPassword(password, doc.salt);
 
-            //checking if password enter by user is the same which is in the db
-            if (doc.password === pass) {
-                if (new_password === confirm_password) {
+                //checking if password enter by user is the same which is in the db
+                if (doc.password === pass) {
+                    if (new_password === confirm_password) {
 
-                    new_salt = new Date().getMilliseconds().toString();
-                    hashed_password = hashPassword(new_password, new_salt);
+                        new_salt = new Date().getMilliseconds().toString();
+                        hashed_password = hashPassword(new_password, new_salt);
 
-                    //Update password in the db
-                    db.collection("users").update({email: req.user.email}, {$set: {password: hashed_password, salt: new_salt}}, function (err, upd) {
-                        if (err) {
-                            throw err;
-                        }
-                    });
+                        //Update password in the db
+                        db.collection("users").update({email: req.user.email}, {$set: {password: hashed_password, salt: new_salt}}, function (err, upd) {
+                            if (err) {
+                                throw err;
 
-                    html = templates.deadline.list_belongs_to_user({user: req.user, changed: true});
-                    res.send(html);
+                            }
+
+
+                            req.flash("successful", "Well done! Successful you change the password.
+
+                        });
+                    } else {
+                        req.flash('not_match', "New password and repeat password don't match, please try again.");
+                        html = templates.user.change_password({text: "Change password", not_match: req.flash('not_match'), user: req.user});
+                        res.send(html);
+                    }
+
                 } else {
-                    html = templates.user.change_password({text: "Change password", user: req.user, changed: false});
+                    req.flash('fail', 'This is not a valid password, please try again.');
+                    html = templates.user.change_password({text: "Change password", user: req.user, fail: req.flash('fail')});
                     res.send(html);
                 }
 
-            } else {
-
-                html = templates.user.change_password({text: "Change password", user: req.user, changed: false});
-                res.send(html);
             }
-
-        });
+        )
+        ;
 
     };
 
