@@ -57,8 +57,7 @@ $(function () {
             $this.find(".js-rounded_progress").find("span.h2").text(timeProgress);
 
             $this.find('.countdown').countdown(endDate, function (event) {
-                $(this).html(event.strftime('<strong>%-w</strong>' + ' week%!w ' + '<strong>%-D</strong> ' + 'day%!D' +
-                    ' <strong>%-H</strong> ' + 'h ' + '<strong>%-M</strong> '  + 'min ' + '<strong>%-S</strong> '
+                $(this).html(event.strftime('<strong>%-D</strong> ' + 'day%!D' + ' <strong>%-H</strong> ' + 'h ' + '<strong>%-M</strong> '  + 'min ' + '<strong>%-S</strong> '
                     + 'sec'));
             });
         });
