@@ -20,7 +20,7 @@ var express = require("express"),
     voteController,
     expressValidator = require('express-validator'),
     RedisStore = require('connect-redis')(express),
-    NODE_ENV = process.env.PASSENGER_ENV || 'dev',
+    NODE_ENV = process.env.PASSENGER_APP_ENV || 'dev',
     conf;
 
 require('handlebars-layouts')(handlebars);
