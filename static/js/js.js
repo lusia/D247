@@ -55,6 +55,10 @@ $(function () {
 
             $this.find(".js-rounded_progress").data('easyPieChart').update(timeProgress);
             $this.find(".js-rounded_progress").find("span.h2").text(timeProgress);
+
+            $this.find('#getting-started').countdown(endDate, function (event) {
+                $(this).html(event.strftime('<strong>%-w</strong>' + ' week%!w ' + '<strong>%-D</strong> ' + 'day%!D' + ' <strong>%-H</strong> ' + 'hour%!H ' + '<strong>%-S</strong> ' + 'second%!S'));
+            });
         });
     };
 
@@ -67,5 +71,6 @@ $(function () {
         changeMonth: true,
         changeYear: true
     });
+
 
 });
