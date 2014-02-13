@@ -3,6 +3,5 @@
 /node_modules
 /app/config/dev.yaml
 /app/config/prod.yaml
-
 /log/*.log
 /bower_components
