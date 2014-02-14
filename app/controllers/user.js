@@ -180,9 +180,7 @@ userController = function (app) {
      * @param res
      */
     actions.change_password = function (req, res) {
-        var html, data = req.flash('data').pop() || {};
-        data.req = req;
-        html = templates.user.change_password({user: req.user, data: data, user_email: req.user.email, user_name: req.user.name});
+        var html = templates.user.change_password({user: req.user, user_email: req.user.email, user_name: req.user.name});
 
         res.send(html);
     };
@@ -220,9 +218,8 @@ userController = function (app) {
 
                             }
 
-
-                            req.flash("successful", "Well done! Successful you change the password.
-
+                            req.flash("successful", "Well done! Successful you changed the password.");
+                            res.redirect("/my_deadlines");
                         });
                     } else {
                         req.flash('not_match', "New password and repeat password don't match, please try again.");
