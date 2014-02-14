@@ -19,7 +19,7 @@ var deadlineController = function (app) {
                     throw err;
                 }
 
-                html = templates.deadline["list_belongs_to_user"]({successful: req.flash("successful"), text: "Show my goals", deadlines: collection, active: "my_deadlines", user: req.user, user_votes: []});                res.send(html);
+                html = templates.deadline["list_belongs_to_user"]({successful: req.flash("successful"), text: "My goals", deadlines: collection, active: "my_deadlines", user: req.user, user_votes: []});                res.send(html);
             });
     };
 
