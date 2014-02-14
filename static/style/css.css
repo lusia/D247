@@ -63,6 +63,3 @@ a.link_to_my_page:hover {
 .info_description a:hover {
     color: #fb6b5b;
 }
-.alert_fail {
-list-style-type: none;
-}

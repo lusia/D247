@@ -8,11 +8,9 @@ var _ = require("underscore"),
  */
 module.exports = function (app) {
     var handlebars = app.get('handlebars');
-
     handlebars.registerHelper('displayFlashErrorsIfExist', function (req) {
         var out = '',
             errs = req.flash('error');
-
         if (errs.length > 0) {
             out = errs.map(function (err) {
                 var msg = '';
@@ -75,5 +73,15 @@ module.exports = function (app) {
         return moment(date).format(format);
     });
 
+    /**
+     * Calculate percentage for specific elements in the collection
+     * @param all - all elements from the collection
+     * @param part - some parts from the collection
+     */
+    handlebars.registerHelper("calculatePercentage", function (all, part) {
+        var out = Math.round((part * 100) / all) + "%";
+
+        return out;
+    });
 
 };

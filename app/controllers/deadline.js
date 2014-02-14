@@ -19,8 +19,7 @@ var deadlineController = function (app) {
                     throw err;
                 }
 
-                html = templates.deadline["list_belongs_to_user"]({successful: req.flash("successful"), text: "Show my deadlines", deadlines: collection, active: "my_deadlines", user: req.user, user_votes: []});
-                res.send(html);
+                html = templates.deadline["list_belongs_to_user"]({successful: req.flash("successful"), text: "Show my goals", deadlines: collection, active: "my_deadlines", user: req.user, user_votes: []});                res.send(html);
             });
     };
 
@@ -30,7 +29,7 @@ var deadlineController = function (app) {
      * @param res
      */
     actions["add_new__get"] = function (req, res) {
-        var html = templates.deadline['new']({active: "add", user: req.user});
+        var html = templates.deadline['new']({text: "Add new goal", active: "add", user: req.user});
         res.send(html);
     };
 
@@ -67,7 +66,7 @@ var deadlineController = function (app) {
                 throw err;
             }
 
-            res.redirect("/my_deadlines");
+            res.redirect("/my_goals");
         });
     };
 
@@ -105,12 +104,10 @@ var deadlineController = function (app) {
             });
 
             if (direction === "up") {
-
                 db.collection("deadlines").update({"_id": new ObjectId(id_deadline)}, {$inc: {result: 1, amount: 1}}, function (err, upd) {
                     if (err) {
                         throw err;
                     }
-
 
                     db.collection("deadlines").findOne({"_id": new ObjectId(id_deadline)}, function (err, doc) {
 
@@ -119,9 +116,7 @@ var deadlineController = function (app) {
 
                 });
 
-
             } else {
-
                 db.collection("deadlines").update({"_id": new ObjectId(id_deadline)}, {$inc: {result: -1, amount: 1}}, function (err, upd) {
                     if (err) {
                         throw err;
@@ -153,11 +148,91 @@ var deadlineController = function (app) {
             newDate = new Date(date);
             dateString = newDate.toUTCString();
 
-            html = templates.deadline.one({user: req.user, dateString: dateString, deadline: deadline});
+            html = templates.deadline.one({text: "Goal", user: req.user, dateString: dateString, deadline: deadline});
             res.send(html);
         });
 
     };
+
+
+    /**
+     *
+     * @type {{}}
+     */
+    actions.statistics = {};
+
+    /**
+     * These actions finding specific documents in deadlines collection
+     * @param req
+     * @param res
+     * @param next
+     */
+    actions.statistics.step1 = function (req, res, next) {
+        db.collection("deadlines").find({}).toArray(function (err, all) {
+            if (err) {
+                throw err;
+            }
+            req.stats = {all: all.length};
+
+
+            next();
+        });
+
+    };
+    actions.statistics.step2 = function (req, res, next) {
+
+        db.collection("deadlines").find({"status": "public"}).toArray(function (err, pub) {
+            if (err) {
+                throw err;
+            }
+
+            var pub_status = pub.length;
+
+            req.stats.pub = pub_status;
+
+            next();
+        });
+    };
+
+    actions.statistics.step3 = function (req, res, next) {
+        db.collection("deadlines").find({"status": "private"}).toArray(function (err, priv) {
+            if (err) {
+                throw err;
+            }
+            var priv_status = priv.length;
+            req.stats.priv = priv_status;
+            next();
+
+        });
+
+
+    };
+
+    actions.statistics.step4 = function (req, res, next) {
+        db.collection("deadlines").find({"date": {$lte: new Date().getTime()}}).toArray(function (err, finished) {
+            if (err) {
+                throw err;
+            }
+            var finished_deadline = finished.length;
+            req.stats.finished = finished_deadline;
+            next();
+        });
+
+    };
+
+    actions.statistics.step5 = function (req, res) {
+        db.collection("deadlines").find({"date": {$gt: new Date().getTime()}}).toArray(function (err, not_finished) {
+            if (err) {
+                throw err;
+            }
+            var html, active = not_finished.length;
+            req.stats["not_finished"] = active;
+
+            html = templates.deadline.statistics({text: "Statistics", user: req.user, stats: req.stats});
+            res.send(html);
+        });
+    };
+
 
     return actions;
 }

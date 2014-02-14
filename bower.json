@@ -20,6 +20,7 @@
     "bootstrap-form-helpers": "~2.3.0",
     "momentjs": "~2.5.0",
     "font-awesome": "~4.0.3",
-    "jquery.ui": "~1.10.3"
+    "jquery.ui": "~1.10.3",
+    "jquery.countdown": "~2.0.3"
   }
 }

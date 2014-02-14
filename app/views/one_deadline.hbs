@@ -1,19 +1,5 @@
 {{#extend "layout"}}
     {{#replace "content"}}
-        <header class="header bg-white b-b">
-            <p>Deadline</p>
-            {{# if user}}
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown"><a href="/my_deadlines"> <span
-                            class="thumb-sm avatar pull-left m-t-n-xs m-r-xs">{{{gravatar user.email}}}</span>
-                        Welcome {{user.name}}</a>
-
-                    </li>
-                    <li><a href="/login/change_password">Change password</a></li>
-                    <li><a href="/logout">Log Out</a></li>
-                </ul>
-            {{/if}}
-        </header>
         <section class="scrollable wrapper">
             <div class="tab-content">
                 <div class="row">
@@ -43,6 +29,7 @@
                                             <div>
                                                 <strong>Until: </strong>
                                                 <span>{{{date deadline.date 'DD-MM-YYYY H:mm'}}}</span>
+                                                <div class="countdown"></div>
                                             </div>
                                             <div>
                                                 Votes:
@@ -109,7 +96,7 @@
                 var disqus_shortname = 'deadline01'; // Required - Replace example with your forum shortname
                 var disqus_identifier = '{{deadline._id}}';
                 var disqus_title = '{{deadline.name}}';
-                var disqus_url = 'http://d247.org/deadline/{{deadline._id}}';
+                var disqus_url = 'http://d247.org/goal/{{deadline._id}}';
 
                 /* * * DON'T EDIT BELOW THIS LINE * * */
                 (function () {

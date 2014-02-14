@@ -20,16 +20,14 @@ var express = require("express"),
     voteController,
     expressValidator = require('express-validator'),
     RedisStore = require('connect-redis')(express),
-    NODE_ENV = process.env.PASSENGER_ENV || 'dev',
+    NODE_ENV = process.env.PASSENGER_APP_ENV || 'dev',
     conf;
-
 
 require('handlebars-layouts')(handlebars);
 require('js-yaml'); //automatically register support for yaml files
 conf = require('./app/config/' + NODE_ENV + '.yaml'); //load config file
 
 app.set("conf", conf);
-
 
 app.set('app_dir', __dirname);
 app.set('handlebars', handlebars);
@@ -126,13 +124,15 @@ app.get("/login/change_password", userController["change_password"]);
 app.post("/login/change_password", userController["change_password_post"]);
 
 deadlineController = require("./app/controllers/deadline.js")(app);
-app.get("/my_deadlines", deadlineController.deadlines);
-app.get("/add_new_deadline", deadlineController["add_new__get"]);
-app.post("/add_new_deadline", deadlineController["add_new__post"]);
-app.get("/deadline/:id", deadlineController["display_one"]);
+app.get("/my_goals", deadlineController.deadlines);
+app.get("/add_new_goal", deadlineController["add_new__get"]);
+app.post("/add_new_goal", deadlineController["add_new__post"]);
+app.get("/goal/:id", deadlineController["display_one"]);
+app.get("/statistics", deadlineController.statistics.step1, deadlineController.statistics.step2,
+    deadlineController.statistics.step3, deadlineController.statistics.step4, deadlineController.statistics.step5);
 
 voteController = require("./app/controllers/vote.js")(app);
-app.post("/deadlines/vote", deadlineController["vote_post"]);
+app.post("/goal/vote", deadlineController["vote_post"]);
 
 aboutController = require('./app/controllers/about.js')(app);
 app.get("/about", aboutController.about);

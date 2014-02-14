@@ -4,10 +4,8 @@ var flash = require('connect-flash'),
     querystring = require('querystring'),
     passport = require("passport"),
     nodemailer = require("nodemailer"),
-    userController,
-    hashPassword;
+    userController, hashPassword = require("./../utils/hashPassword");
 
-hashPassword = require("./../utils/hashPassword");
 userController = function (app) {
     var db = app.get('db'), templates = app.get('templates'), actions = {};
 
@@ -22,6 +20,7 @@ userController = function (app) {
         data.active = "sign";
 
         data.req = req;
+        data.text = "Sign Up";
         html = templates.user.sign(data);
         res.send(html);
     };
@@ -75,6 +74,7 @@ userController = function (app) {
 
             });
         } else {
+
             req.flash('error', errors);
             req.flash('data', req.body);
             res.redirect('/sign');
@@ -88,7 +88,7 @@ userController = function (app) {
      * @param res
      */
     actions.login = function (req, res) {
-        var html = templates.user.login({req: req, active: "login"});
+        var html = templates.user.login({text: "Log In", req: req, active: "login"});
         res.send(html);
     };
 
@@ -96,7 +96,7 @@ userController = function (app) {
      * checking users authentication
      *
      */
-    actions.login_post = passport.authenticate("local", {successRedirect: '/my_deadlines', failureRedirect: '/login',
+    actions.login_post = passport.authenticate("local", {successRedirect: '/my_goals', failureRedirect: '/login',
         failureFlash: 'Could not authenticate, please try again'});
 
     /**
@@ -105,7 +105,7 @@ userController = function (app) {
      * @param res
      */
     actions.remind_password = function (req, res) {
-        var html = templates.user.remind_password({});
+        var html = templates.user.remind_password({text: "Remind password"});
         res.send(html);
     };
 
@@ -180,8 +180,7 @@ userController = function (app) {
      * @param res
      */
     actions.change_password = function (req, res) {
-        var html = templates.user.change_password({user: req.user, user_email: req.user.email, user_name: req.user.name});
-
+        var html = templates.user.change_password({text: "Change password", user: req.user});
         res.send(html);
     };
 

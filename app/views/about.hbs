@@ -1,19 +1,5 @@
 {{#extend "layout"}}
     {{#replace "content"}}
-        <header class="header bg-white b-b">
-            <p>About</p>
-            {{# if user}}
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown"><a href="/my_deadlines"> <span
-                            class="thumb-sm avatar pull-left m-t-n-xs m-r-xs">{{{gravatar user.email}}}</span>
-                        Welcome {{user.name}}</a>
-
-                    </li>
-                    <li><a href="/login/change_password">Change password</a></li>
-                    <li><a href="/logout">Log Out</a></li>
-                </ul>
-            {{/if}}
-        </header>
         <div class="row">
             <div class="col-sm-6">
                 <section class="panel">
@@ -28,8 +14,7 @@
                                 <br>
 
                                 <p class="explain_description">The main idea behind this project is to help you achieve your goals, plans and
-                                    realize your dreams.
-                                    Useful time indicator show how much time has passed until time when you expect
+                                    realize your dreams. Useful time indicator show how much time has passed until time when you expect
                                     to realize your plans. Don't hesitate to share your small plans, ex: "Clean my
                                     room" and those bigger one, like "Find new job", "Buy a house". I hope you will
                                     find useful and easy to use. <i class="fa fa-smile-o"></i>

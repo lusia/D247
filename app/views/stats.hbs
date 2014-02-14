@@ -1,0 +1,66 @@
+{{#extend "layout"}}
+    {{#replace "content"}}
+        <div class="row">
+            <div class="col-sm-6">
+                <section class="panel">
+                    <header class="panel-heading bg bg-success text-center">&nbsp;
+                    </header>
+                    <div class="panel-body">
+
+                        <table class="table table-striped m-b-none text-sm statistics">
+                            <tbody>
+                            <tr>
+                                <th>Name</th>
+                                <th>Amount</th>
+                                <th>%</th>
+
+                            </tr>
+                            <tr>
+                                <td>All goals</td>
+                                <td>{{stats.all}}</td>
+                                <td>100%</td>
+
+                            </tr>
+                            <tr>
+                                <td>Public</td>
+                                <td>
+                                    {{stats.pub}}
+                                </td>
+                                <td>{{{calculatePercentage stats.all stats.pub}}}</td>
+
+                            </tr>
+                            <tr>
+                                <td>Private</td>
+                                <td>
+                                    {{stats.priv}}
+                                </td>
+                                <td>{{{calculatePercentage stats.all stats.priv}}}</td>
+                            </tr>
+                            <tr>
+                                <td>Finished</td>
+                                <td>
+                                    {{stats.finished}}
+                                </td>
+                                <td>{{{calculatePercentage stats.all stats.finished}}}</td>
+                            </tr>
+                            <tr>
+                                <td>In progress</td>
+                                <td>
+                                    {{stats.not_finished}}
+                                </td>
+                                <td>{{{calculatePercentage stats.all stats.not_finished}}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                        <h4>
+                        </h4>
+                    </div>
+                </section>
+            </div>
+        </div>
+    {{/replace}}
+{{/extend}}
+
+
+

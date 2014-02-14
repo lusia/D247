@@ -35,8 +35,9 @@ compileTemplates = function (app) {
     templates.deadline = {
         'new': handlebars.compile(fs.readFileSync(fFindPath('/app/views/add_form.hbs'), 'utf8')),
         list_belongs_to_user: handlebars.compile(fs.readFileSync(fFindPath('/app/views/deadlines_list.hbs'), 'utf8')),
-        one : handlebars.compile(fs.readFileSync(fFindPath('/app/views/one_deadline.hbs'), 'utf8')),
-        vote: handlebars.compile(fs.readFileSync(fFindPath('/app/views/vote.hbs'), 'utf8'))
+        one: handlebars.compile(fs.readFileSync(fFindPath('/app/views/one_deadline.hbs'), 'utf8')),
+        vote: handlebars.compile(fs.readFileSync(fFindPath('/app/views/vote.hbs'), 'utf8')),
+        statistics: handlebars.compile(fs.readFileSync(fFindPath('/app/views/stats.hbs'), 'utf8'))
     };
 
 
