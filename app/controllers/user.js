@@ -217,8 +217,8 @@ userController = function (app) {
 
                             }
 
-                            req.flash("successful", "Well done! Successful you changed the password.");
-                            res.redirect("/my_deadlines");
+                            req.flash("successful", "Well done! You successfully changed the password.");
+                            res.redirect("/my_goals");
                         });
                     } else {
                         req.flash('not_match', "New password and repeat password don't match, please try again.");
