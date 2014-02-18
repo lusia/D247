@@ -65,4 +65,10 @@ a.link_to_my_page:hover {
 }
 .alert_fail {
     list-style-type: none;
+    width: 460px;
+    margin-left: 60px;
+}
+.alert_info {
+    margin-left: 14px;
+    width: 903px;
 }

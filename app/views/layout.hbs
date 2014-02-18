@@ -47,7 +47,7 @@
                                 <li class="{{#ifeq active "my_deadlines" }}active{{/ifeq}}">
                                     <a href="/my_goals">
                                         <i class="fa fa-list"></i>
-                                        <span>Show my goals</span>
+                                        <span>My goals</span>
                                     </a>
                                 </li>
                                 <li class="{{#ifeq active "statistics" }}active{{/ifeq}}">
@@ -110,7 +110,7 @@
                     <p>{{text}}</p>
                     {{# if user}}
                         <ul class="nav navbar-nav navbar-right">
-                            <li class="dropdown"><a href="/my_deadlines"> <span
+                            <li class="dropdown"><a href="/my_goals"> <span
                                     class="thumb-sm avatar pull-left m-t-n-xs m-r-xs">{{{gravatar user.email}}}</span>
                                 Welcome {{user.name}}</a>
                             </li>
