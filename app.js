@@ -6,6 +6,7 @@ var express = require("express"),
     _ = require("underscore"),
     passport = require("passport"),
     LocalStrategy = require('passport-local').Strategy,
+    GoogleStrategy = require('passport-google-oauth').OAuth2Strategy,
     crypto = require("crypto"),
     MongoClient = require("mongodb").MongoClient,
     ObjectId = require('mongodb').ObjectID,
@@ -66,6 +67,7 @@ app.set('db', db);
 /**
  * Authenticate user
  */
+
 passport.use(new LocalStrategy(
     function (email, password, done) {
         db.collection("users").findOne({ email: email }, function (err, user) {
@@ -88,6 +90,34 @@ passport.use(new LocalStrategy(
     }
 ));
 
+
+passport.use(new GoogleStrategy(conf.google, function (req, accessToken, refreshToken, profile, done) {
+    if (req.user) {
+        done(null, req.user);
+    } else {
+        db.collection("users").findOne({email: profile.emails[0].value}, function (err, user) {
+            if (err) {
+                throw err;
+            }
+            if (user !== null) {
+                done(null, user);
+            } else {
+                user = {name: profile.displayName,
+                    provider: profile.provider,
+                    email: profile.emails[0].value};
+
+                db.collection("users").insert(user, function (err, user) {
+                    if (err) {
+                        done(err);
+                    }
+                    done(null, user[0]);
+                });
+            }
+        });
+
+    }
+}));
+
 app.use(function (err, req, res, next) {
     fs.writeFile(__dirname + "/log/" + moment().format("YYYY-MM-DD") + ".log", moment().format("HH:mm") + " " +
         err.stack + "\n", {"flag": "a"}, function (err) {
@@ -99,6 +129,7 @@ app.use(function (err, req, res, next) {
         res.send(500, 'Something is broken!');
     });
 });
+
 passport.serializeUser(function (user, done) {
     done(null, user._id);
 });
@@ -111,12 +142,13 @@ passport.deserializeUser(function (id, done) {
 
 mainController = require('./app/controllers/main')(app);
 app.get("/", mainController.main);
-
 userController = require("./app/controllers/user")(app);
 app.get("/sign", userController.sign);
 app.post("/sign", userController["sign_post"]);
 app.get("/login", userController.login);
 app.post("/login", userController["login_post"]);
+app.get("/auth/google", userController["login_google"]);
+app.get("/oauth2callback", userController["login_google_callback"]);
 app.get("/logout", userController.logout);
 app.get("/login/remind_password", userController["remind_password"]);
 app.post("/login/remind_password", userController["remind_password_post"]);
