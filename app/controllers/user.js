@@ -60,7 +60,8 @@ userController = function (app) {
                         "name": name,
                         "email": email,
                         "password": hashedPassword,
-                        "salt": salt
+                        "salt": salt,
+                        "provider": "normal_form"
                     }
                 ];
             db.collection("users").insert(users, function (err, ins) {

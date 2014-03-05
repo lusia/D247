@@ -7,7 +7,6 @@ var express = require("express"),
     passport = require("passport"),
     LocalStrategy = require('passport-local').Strategy,
     GoogleStrategy = require('passport-google-oauth').OAuth2Strategy,
-    User = require('./app/models/User'),
     crypto = require("crypto"),
     MongoClient = require("mongodb").MongoClient,
     ObjectId = require('mongodb').ObjectID,
@@ -68,6 +67,7 @@ app.set('db', db);
 /**
  * Authenticate user
  */
+
 passport.use(new LocalStrategy(
     function (email, password, done) {
         db.collection("users").findOne({ email: email }, function (err, user) {
@@ -91,32 +91,32 @@ passport.use(new LocalStrategy(
 ));
 
 
-passport.use(new GoogleStrategy(conf.google, function (req, accessToken, refreshToken, profile, done, include_granted_scopes) {
-    console.log("here");
+passport.use(new GoogleStrategy(conf.google, function (req, accessToken, refreshToken, profile, done) {
     if (req.user) {
-        console.log(req.user);
+        done(null, req.user);
     } else {
-        console.log(profile);
+        db.collection("users").findOne({email: profile.emails[0].value}, function (err, user) {
+            if (err) {
+                throw err;
+            }
+            if (user !== null) {
+                done(null, user);
+            } else {
+                user = {name: profile.displayName,
+                    provider: profile.provider,
+                    email: profile.emails[0].value};
 
-        User.findOne({ google: profile.id }, function(err, existingUser) {
-            if (existingUser) return done(null, existingUser);
-            console.log(existingUser, 'existinguser 2');
-            var user = new User();
-            user.email = profile._json.email;
-            user.google = profile.id;
-            user.tokens.push({ kind: 'google', accessToken: accessToken });
-            user.profile.name = profile.displayName;
-            user.profile.gender = profile._json.gender;
-            user.profile.picture = profile._json.picture;
-            user.save(function(err) {
-                done(err, user);
-                console.log(user, '2');
-            });
+                db.collection("users").insert(user, function (err, user) {
+                    if (err) {
+                        done(err);
+                    }
+                    done(null, user[0]);
+                });
+            }
         });
+
     }
 }));
-
-
 
 app.use(function (err, req, res, next) {
     fs.writeFile(__dirname + "/log/" + moment().format("YYYY-MM-DD") + ".log", moment().format("HH:mm") + " " +
@@ -129,6 +129,7 @@ app.use(function (err, req, res, next) {
         res.send(500, 'Something is broken!');
     });
 });
+
 passport.serializeUser(function (user, done) {
     done(null, user._id);
 });
@@ -141,7 +142,6 @@ passport.deserializeUser(function (id, done) {
 
 mainController = require('./app/controllers/main')(app);
 app.get("/", mainController.main);
-
 userController = require("./app/controllers/user")(app);
 app.get("/sign", userController.sign);
 app.post("/sign", userController["sign_post"]);
