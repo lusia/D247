@@ -2,68 +2,69 @@
     {{#replace "content"}}
         <section class="scrollable wrapper">
             <div class="tab-content">
-            <div class="row">
-                {{#unless deadlines.length}}
-                    <header class="panel-heading bg bg-success text-center">&nbsp;</header>
-                    <div class="panel-body">
-                        <article class="media">
-                            <div class="media-body">
-                                <p class="info_description explain_description">Hello, here are no deadlines yet, so you
-                                    can add your first deadline <a href="/add_new_goal">HERE</a></p>
-
-                            </div>
-                        </article>
-                    </div>
-                {{/unless}}
-                {{# if successful}}
-                    <div class="alert_info alert alert-success">
-                        <button type="button" class="close" data-dismiss="alert">×</button>
-                        {{successful}}
-                    </div>
-                {{/if}}
-                {{#each deadlines}}
-                    <div class="js-deadline col-lg-9" data-deadlineId='{{_id}}'>
-                        <section class="panel no-borders hbox">
-                            <aside>
-                                <div class="panel-body">
-
-                                    <div class="pos-rlt col-lg-4">
-                                        {{{gravatar user_email}}}
-                                    </div>
-                                    <div class="pos-rlt col-lg-8 link_name_of_deadline">
-                                        <blockquote>
-                                            <p><a href="/goal/{{_id}}"><strong>{{name}}</strong></a></p>
-                                        </blockquote>
-                                    </div>
+                <div class="row">
+                    {{#unless deadlines.length}}
+                        <header class="panel-heading bg bg-success text-center">&nbsp;</header>
+                        <div class="panel-body">
+                            <article class="media">
+                                <div class="media-body">
+                                    <p class="info_description explain_description">Hello, here are no deadlines yet, so
+                                        you can add your first deadline <a href="/add_new_goal">HERE</a></p>
                                 </div>
-                            </aside>
-                            <div class="col-lg-12 col-lg-offset-1">
-                                <aside class="bg-primary clearfix lter r-r text-right v-middle progress_block">
-                                    <div class="js-progresses_container progresses_container"
-                                         data-end='{{this.date}}'
-                                         data-start='{{createDate}}'>
-                                        <div class="col-lg-8">
-                                            <div><strong>Until : </strong>
-                                                <span>{{{date date 'DD-MM-YYYY H:mm'}}}</span></div>
-                                            <div class="countdown"></div>
-                                            <div>
-                                                Votes:
-                                                {{#voteButtons this ../user_votes ../user}}
-                                                    <a class="js-vote_up btn btn-default btn-xs"
-                                                       data-vote="up"
-                                                       href="#"><i class="fa fa-thumbs-o-up"></i>UP</a>
-                                                    <a class="js-vote_down btn btn-default btn-xs"
-                                                       data-vote="down"
-                                                       href="#"><i class="fa fa-thumbs-o-down"></i>DOWN</a>
-                                                {{/voteButtons}}
-                                                <span class="btn btn-success btn-xs">{{result}}
-                                                    /{{amount}}</span>
-                                            </div>
-                                            <div class="progress progress-sm progress-striped active result">
-                                                <div class="progress-bar progress-bar-success js-progress_bar"
-                                                     data-toggle="tooltip"></div>
-                                            </div>
+                            </article>
+                        </div>
+                    {{/unless}}
+                    {{# if successful}}
+                        <div class="alert_info alert alert-success">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            {{successful}}
+                        </div>
+                    {{/if}}
+                    {{#each deadlines}}
+                        <div class="box_content">
+                        <div class="js-deadline col-lg-9" data-deadlineId='{{_id}}'>
+                            <section class="panel no-borders hbox">
+                                <aside>
+                                    <div class="panel-body">
+                                        <div class="pos-rlt col-lg-4">
+                                            {{{gravatar user_email}}}
                                         </div>
+                                        <div class="pos-rlt col-lg-8 link_name_of_deadline">
+                                            <blockquote>
+                                                <p><a href="/goal/{{_id}}"><strong>{{name}}</strong></a></p>
+                                            </blockquote>
+                                        </div>
+                                    </div>
+                                </aside>
+                                <div class="col-lg-12 col-lg-offset-1">
+                                    <aside class="bg-primary clearfix lter r-r text-right v-middle progress_block">
+                                        <div class="js-progresses_container progresses_container"
+                                             data-end='{{this.date}}'
+                                             data-start='{{createDate}}'>
+                                            <div class="col-lg-8">
+                                                    <div>
+                                                        <strong>Until : </strong>
+                                                        <span>{{{date date 'DD-MM-YYYY H:mm'}}}</span></div>
+                                                    <div class="countdown"></div>
+
+                                                <div>
+                                                    Votes:
+                                                    {{#voteButtons this ../user_votes ../user}}
+                                                        <a class="js-vote_up btn btn-default btn-xs"
+                                                           data-vote="up"
+                                                           href="#"><i class="fa fa-thumbs-o-up"></i>UP</a>
+                                                        <a class="js-vote_down btn btn-default btn-xs"
+                                                           data-vote="down"
+                                                           href="#"><i class="fa fa-thumbs-o-down"></i>DOWN</a>
+                                                    {{/voteButtons}}
+                                                    <span class="btn btn-success btn-xs">{{result}}
+                                                        /{{amount}}</span>
+                                                </div>
+                                                <div class="progress progress-sm progress-striped active result">
+                                                    <div class="progress-bar progress-bar-success js-progress_bar"
+                                                         data-toggle="tooltip"></div>
+                                                </div>
+                                            </div>
 
                                         <div class="col-lg-4 rounded_progress">
                                             <div class="inline m-t-sm">
@@ -79,13 +80,14 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </aside>
-                            </div>
-                        </section>
-                    </div>
-                {{/each}}
-            </div>
+                                </div>
+                                    </aside>
+                                </div>
+                            </section>
+                        </div>
+                        </div>
+                    {{/each}}
+                </div>
             </div>
         </section>
     {{/replace}}

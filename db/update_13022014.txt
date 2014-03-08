@@ -1,0 +1,3 @@
+db.users.ensureIndex({'email': 1}, {unique: true});
+
+db.deadlines.ensureIndex({'user_id': 1, 'status': 1, 'date' : 1});

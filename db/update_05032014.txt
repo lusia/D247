@@ -1,0 +1,2 @@
+db.users.dropIndex({"email" : 1});
+db.users.ensureIndex({"email" : 1, "provider" : 1}, {unique: true});

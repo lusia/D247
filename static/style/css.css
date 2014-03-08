@@ -34,12 +34,19 @@ p.name_of_deadline {
     margin-top: 20px;
 }
 
-.progresses_container div div {
-    margin-bottom: 10px;
+.countdown {
+    margin: 10px 0 10px 0;
+}
+
+.content {
+    bottom: 10px;
+    position: relative;
+
 }
 
 .progress_block {
-    height: 162px;
+    min-height: 170px;
+    padding: 15px;
 }
 
 .explain_description {
@@ -63,11 +70,13 @@ a.link_to_my_page:hover {
 .info_description a:hover {
     color: #fb6b5b;
 }
+
 .alert_fail {
     list-style-type: none;
     width: 460px;
     margin-left: 60px;
 }
+
 .alert_info {
     margin-left: 14px;
     width: 903px;
