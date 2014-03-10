@@ -66,7 +66,6 @@ userController = function (app) {
                 if (err) {
                     throw err;
                 } else {
-
                     req.body.username = email;
                     passport.authenticate('local')(req, res, function () {
                         res.redirect('/');

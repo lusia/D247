@@ -70,7 +70,7 @@ app.set('db', db);
 
 passport.use(new LocalStrategy(
     function (email, password, done) {
-        db.collection("users").findOne({ email: email }, function (err, user) {
+        db.collection("users").findOne({ email: email, provider: "normal_form"}, function (err, user) {
             var salt, hashedPassword;
             if (err) {
                 return done(err);
